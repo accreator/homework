@@ -1,0 +1,55 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{times}                       % 使用 Times New Roman 字体
+\usepackage{CJK,CJKnumb,CJKulem}         % 中文支持宏包
+\usepackage{color}                       % 支持彩色
+\usepackage{amsthm} %数学定理
+\usepackage{amsmath} %数学符号
+\usepackage{amssymb} %数学符号
+\usepackage{indentfirst} %缩进
+\usepackage{graphicx} %图形支持
+\usepackage{mathrsfs} %花体支持
+\newcommand{\ch}{{\cal H}}
+%——————————–其他宏包——————————
+%\usepackage{amsmath,amsthm,amsfonts,amssymb,bm} % 数学宏包
+%\usepackage{graphicx,psfrag}                    % 图形宏包
+%\usepackage{makeidx}                            % 建立索引宏包
+%\usepackage{listings}                           % 源代码宏包
+%———————————正文———————————–
+% 换行 \\
+% 换页 \clearpage
+\begin{document} % 开始正文
+\begin{CJK*}{GBK}{song}                          % 开始中文环境
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem*{myproof}{Proof}
+\newtheorem*{myexercise}{Exercise}
+\newtheorem*{myproblem}{Problem}
+\setlength{\parindent}{0em}
+\author{Kai Sun(孙锴)}                             % 作者
+\title{Homework 10}                                % 题目
+\maketitle                                        % 生成标题
+Problem 1. \\
+(a) 因为每个三角形中恰有一个seed，故$X=2, E(X)=2$，且$Pr(X=E(X))=1$ \\
+(b) 首先可见$X\leq 3$，因为若存在$X>3$的情况，则在$C_6$必存在相邻两点，其中必至少有一个点不满足seed的定义。其次易见$X>0$。\\
+$Pr(X=1)=\frac{2^4}{5!}=\frac{2}{15}$ \\
+$Pr(X=3)=\frac{2\times(3!\times 3!+3!\times 2!)}{6!}=\frac{2}{15}$ \\
+$Pr(X=2)=1-Pr(X=1)-Pr(X=3)=\frac{11}{15}$ \\
+$E(X)=2$ \\
+$Pr(X=E(X))=Pr(X=2)=\frac{11}{15}$ \\
+
+Problem 2. \\
+对于$i\in [n-1]$，将$a_i$以$\frac{1}{2}$概率赋值$1$，$\frac{1}{2}$概率赋值$0$，并且$a_i$的赋值过程与任意$a_j (j\neq i)$无关。令$a_n = a_1\ xor\ a_2\ xor\ \ldots\ xor\ a_{n-1}$。\\
+对于$i\in [n]$，设$e_i$表示事件$a_i=1$。现在我们断言$\{e_i\}$中任意$n-1$个事件是相互独立的，但$\{e_1,e_2,\ldots,e_n\}$不是相互独立的。 \\
+证明：$\forall S={e_{k_1},e_{k_2},\ldots,e_{k_m}}\subsetneq [n]$，这里$k_1<k_2<\ldots<k_m$，若$n\notin S$，则$Pr(\bigcap_{i\in S}e_i)=(\frac{1}{2})^{m}=\prod_{i\in S}Pr(e_i)$；若$n\in S$，即$k_m=n$，则$Pr(\bigcap_{i\in S}e_i) = Pr(e_{k_1})Pr(e_{k_2}|e_{k_1})\ldots Pr(e_{k_m}|e_{k_1},e_{k_2},\ldots,e_{k_{m-1}})=(\frac{1}{2})^{m-1}Pr(e_n|e_{k_1},e_{k_2},\ldots,e_{k_{m-1}})$，由于存在$e_n$发生当且仅当恰有奇数个$e_i (i \in [n-1])$发生，于是要证$Pr(e_n|e_{k_1}, e_{k_2}, \ldots, e_{k_{m-1}}) = \frac{1}{2}$，只需证明$Pr(\sum_{i\in [n-1]} a_i\equiv 1 (mod\ 2)) = Pr(\sum_{i\in [n-1]} a_i\equiv 0 (mod\ 2)) = \frac{1}{2}$，而这是容易看出的，因为$\overline{S}$不为空。于是$\{e_i\}$中任意$n-1$个事件是相互独立的。\\
+因为$Pr(e_1,e_2,\ldots,e_{n-1},e_n)=Pr(e_1)Pr(e_2|e_1)\ldots Pr(e_n|e_1,e_2,\ldots,e_{n-1})=(\frac{1}{2})^{n-1}Pr(e_n|e_1,e_2,\ldots,e_{n-1})$，显然$Pr(e_n|e_1,e_2,\ldots,e_{n-1})\neq \frac{1}{2}$（因为在给定$e_1,e_2,\ldots,e_{n-1}$时，$e_n$是否发生已是确定的），所以$Pr(e_1,e_2,\ldots,e_{n-1},e_n)\neq \prod_{i\in [n]}Pr(e_i)$，故$\{e_1,e_2,\ldots,e_n\}$不是相互独立的。\\
+
+Problem 3. \\
+令每个pub随机选择一天（uniformly at random），令事件$A_i$表示第$i$个人没有被满足，则$Pr(A_i)=(\frac{2}{3})^{40}$。令$p=(\frac{2}{3})^{40}\geq Pr(A_i)$。下面我们描述dependency graph $G(V,E)$，其中$V=\{A_i\}$，如果两个人$i,j(i\neq j)$有同一个喜欢的pub，则边$(A_i,A_j),(A_j,A_i)\in E$。要说明$G$是dependency graph，只需说明$A_i$与$\{A_j|(A_i,A_j)\notin E \}$独立，而这是容易看出的，因为前者与后者没有共同喜欢的pub。于是$d^{+}(A_i)\leq d$，这里$d=2013\times 40$。于是$4pd<1$，由$L.L.L.$，$Pr(\bigcap_i\overline{A_i})>0$，故存在一种满足所有人的安排方案。\\
+
+Problem 4. \\
+(a)对于任意$Z_a$，它的公差$\leq \lfloor \frac{n-1}{k-1} \rfloor$。对于任何$[n]$中的数，它至多存在于$\lfloor\frac{n-1}{k-1}\rfloor k$个长度为$k$的在$[n]$中的等差数列中（因为长度固定的等差数列可由起点和公差唯一确定）。因此，对于任意$Z_a$，有至多$\lfloor\frac{n-1}{k-1}\rfloor k^2$个$Z_a$与它有相同的元素，当$k>10$时，$\lfloor\frac{n-1}{k-1}\rfloor k^2 < 1.25kn$ \\
+(b)令每个元素随机选择一种颜色（uniformly at random），令事件$A_i$表示第$i$个$Z_a$是同色的，则$Pr(A_i)=2^{1-k}$。令$p=2^{1-k}\geq Pr(A_i)$。下面我们描述dependency graph $G(V,E)$，其中$V=\{A_i\}$，对于任意两个不同的$Z_a\ i,j$，如果$i,j$有相同的元素，则边$(A_i,A_j),(A_j,A_i)\in E$。要说明$G$是dependency graph，只需要说明$A_i$与$\{A_j|(A_i,A_j)\notin E \}$独立，而这是容易看出来的，因为前者与后者没有相同的元素。于是$d^{+}(A_i)\leq d$，这里$d=\lfloor\frac{n-1}{k-1}\rfloor k^2<1.25kn\leq 2^{k-3}$。于是$4pd<1$，由$L.L.L.$，$Pr(\bigcap_i\overline{A_i})>0$，故存在一种染色方案使得没有同色的$Z_a$。
+\end{CJK*}     % 结束中文环境
+\end{document} % 结束正文 

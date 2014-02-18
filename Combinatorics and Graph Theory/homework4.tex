@@ -1,0 +1,62 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{times}                       % 使用 Times New Roman 字体
+\usepackage{CJK,CJKnumb,CJKulem}         % 中文支持宏包
+\usepackage{color}                       % 支持彩色
+\usepackage{amsthm} %数学定理
+\usepackage{amsmath} %数学符号
+\usepackage{amssymb} %数学符号
+\usepackage{indentfirst} %缩进
+\usepackage{graphicx} %图形支持
+\usepackage{mathrsfs} %花体支持
+%——————————–其他宏包——————————
+%\usepackage{amsmath,amsthm,amsfonts,amssymb,bm} % 数学宏包
+%\usepackage{graphicx,psfrag}                    % 图形宏包
+%\usepackage{makeidx}                            % 建立索引宏包
+%\usepackage{listings}                           % 源代码宏包
+%———————————正文———————————–
+% 换行 \\
+% 换页 \clearpage
+\begin{document} % 开始正文
+\begin{CJK*}{GBK}{song}                          % 开始中文环境
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem*{myproof}{Proof}
+\newtheorem*{myexercise}{Exercise}
+\newtheorem*{myproblem}{Problem}
+\setlength{\parindent}{0em}
+\author{Kai Sun(孙锴)}                             % 作者
+\title{Homework 4}                                % 题目
+\maketitle                                        % 生成标题
+Problem 1. \\
+给定符合题目要求的二分图，对图红蓝染色（其中$A$染为红色，$B$染为蓝色），则对于图中的每条边，它的一个端点为红色，一个端点为蓝色。设红色点数为$a=|A|$，蓝色点数为$b=|B|$，边数为$m$。由于为$k$正则图，所以由红色点共发出$k\times a=m$条边，由蓝色点共发出$k\times b=m$条边，所以$k\times a=k\times b$，从而$|A|=|B|$。\\
+
+Problem 2. \\
+$n=1$时, $|Aut(G)|=4!=24$ \\
+$n>1$时, $|Aut(G)|=2\times 2^{n-2}\times 3!3!=9\times 2^{n+1}$ \\
+
+Problem 3. \\
+设$V=[n]$, $E=\{\{1,2\},\{2,3\},\ldots,\{n-1,n\},\{n,1\}\}\cup \{\{1,4\},\{2,4\}\}$, 断言对于$G=(V,E)$有$|Aut(G)|=1$。\\
+对断言的证明：首先注意到1,2的度为3，3的度为2，4的度为4，其它点的度都为2。由于只有4的度为4，所以4在同构中只能对应4，由于3是唯一一个度为2，且相邻的两个点度分别为3、4的点，所以在3在同构中只能对应3，因为2与4分别是3的唯二两个邻结点，且3、4已确定，所以2在同构中只能对应2，类似地可以推出1在同构中只能对应1。接下来，只剩下$n-4$个度为2的点，采用“到4且不越过度大于2的结点的最短距离”作为判定，可以推出这$n-4$个点在同构中也只能对应其本身。综上，断言成立。\\
+
+Problem 4. \\
+当$n=4k+2$时, 由于$n(n-1)/2=(4k+1)(2k+1)$为奇数，所以不存在满足题目要求的$G$ \\
+当$n=4k+3$时, 由于$n(n-1)/2=(4k+3)(2k+1)$为奇数，所以不存在满足题目要求的$G$ \\
+当$n=4k$时, 设$V=[4n]$, $E=\{\{i,j\}|1\leq i<j\leq 2n\}\cup \{\{i,j\}|1\leq i\leq n,2n+1\leq j\leq 3n\}\cup \{\{i,j\}|n+1\leq i\leq 2n, 3n+1\leq j\leq 4n\}$, 则$G\cong \widetilde{G}$ （显然，可参考图1）\\
+\begin{figure}[h]
+\begin{center}
+\includegraphics[scale = 0.35]{hw4_1}
+\end{center}
+\caption{图1}
+\end{figure}
+当$n=4k+1$时, 设$V=[4n+1]$, $E=\{\{i,j\}|1\leq i<j\leq 2n\}\cup \{\{i,j\}|1\leq i\leq n,2n+1\leq j\leq 3n\}\cup \{\{i,j\}|n+1\leq i\leq 2n, 3n+1\leq j\leq 4n\}\cup \{\{4n+1,i\}|1\leq i\leq 2n\}$, 则$G\cong \widetilde{G}$ （显然，可参考图2）\\
+综上，当且仅当$n=4k$或$n=4k+1$时，存在$[n]$上的图$G$满足$G\cong \widetilde{G}$。\\
+\begin{figure}[h]
+\begin{center}
+\includegraphics[scale = 0.35]{hw4_2}
+\end{center}
+\caption{图2}
+\end{figure}
+\end{CJK*}     % 结束中文环境
+\end{document} % 结束正文 

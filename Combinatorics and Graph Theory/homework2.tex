@@ -1,0 +1,73 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{times}                       % 使用 Times New Roman 字体
+\usepackage{CJK,CJKnumb,CJKulem}         % 中文支持宏包
+\usepackage{color}                       % 支持彩色
+\usepackage{amsthm} %数学定理
+\usepackage{amsmath} %数学符号
+\usepackage{amssymb} %数学符号
+\usepackage{indentfirst} %缩进
+\usepackage{graphicx} %图形支持
+\usepackage{mathrsfs} %花体支持
+%——————————–其他宏包——————————
+%\usepackage{amsmath,amsthm,amsfonts,amssymb,bm} % 数学宏包
+%\usepackage{graphicx,psfrag}                    % 图形宏包
+%\usepackage{makeidx}                            % 建立索引宏包
+%\usepackage{listings}                           % 源代码宏包
+%———————————正文———————————–
+% 换行 \\
+% 换页 \clearpage
+\begin{document} % 开始正文
+\begin{CJK*}{GBK}{song}                          % 开始中文环境
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem*{myproof}{Proof}
+\newtheorem*{myexercise}{Exercise}
+\newtheorem*{myproblem}{Problem}
+\setlength{\parindent}{0em}
+\author{Kai Sun(孙锴)}                             % 作者
+\title{Homework 2}                                % 题目
+\maketitle                                        % 生成标题
+Problem 1. \\
+定义$\mathcal{A}=([4],\preccurlyeq)$，则$\mathcal{P}=\mathcal{A}\times\mathcal{A}\times\mathcal{A}\times\mathcal{A}$。\\
+由于
+\begin{displaymath}
+\mu_{\mathcal{A}}=
+\left( \begin{array}{cccc}
+1 & -1 &  0 &  0 \\
+0 &  1 & -1 &  0 \\
+0 &  0 &  1 & -1 \\
+0 &  0 &  0 &  1 \\
+\end{array} \right)
+\end{displaymath} \\
+于是
+$\mu_{\mathcal{P}}((x_1,x_2,x_3,x_4),(y_1,y_2,y_3,y_4))=\Pi_{i}\mu_{\mathcal{A}}(x_i,y_i)$ \\
+要满足$\mu_{\mathcal{P}}(x,y)<0$，必有$1$或$3$个$\mu_{\mathcal{A}}(x_i,y_i)<0$，通过简单的讨论可得共有$4\times 4\times 3^{3} + 4\times 3\times 4^{3}=1200$。 \\
+
+Problem 2. \\
+Proof:
+$\Sigma_{r=0}^{n}\binom{n}{r}x^{r}=(x+1)^{n}$ \\
+$\frac{d}{dx}(\Sigma_{r=0}^{n}\binom{n}{r}x^{r})=\frac{d}{dx}(x+1)^{n}$ \\
+$\Sigma_{r=0}^{n}\binom{n}{r}rx^{r-1}=n(x+1)^{n-1}$ (1) \\
+$\frac{d}{dx}(\Sigma_{r=0}^{n}\binom{n}{r}rx^{r-1})=\frac{d}{dx}n(x+1)^{n-1}$ \\
+$\Sigma_{r=0}^{n}\binom{n}{r}r(r-1)x^{r-2}=n(n-1)(x+1)^{n-2}$ \\
+$\Sigma_{r=0}^{n}\binom{n}{r}r^{2}x^{r-2}-\Sigma_{r=0}^{n}\binom{n}{r}rx^{r-2}=n(n-1)(x+1)^{n-2}$ (2) \\
+令$x=1$，则对于(1)(2)分别有 \\
+$\Sigma_{r=0}^{n}\binom{n}{r}r=n2^{n-1}$ (3) \\
+$\Sigma_{r=0}^{n}\binom{n}{r}r^{2}-\Sigma_{r=0}^{n}\binom{n}{r}r=n(n-1)2^{n-2}$ (4) \\
+将(3)代入(4)，得 \\
+$\Sigma_{r=0}^{n}\binom{n}{r}r^{2}=n2^{n-1}+n(n-1)^{n-2}=n(n+1)^{n-2}$ \\
+组合证明：要从$n$个人中选出若干人发校级奖学金，并且从校级奖学金获得者中选取$2$人同时授予专项奖学金（可授予给同一人）。式子两边以两种方式对所有的情况数进行计数。对于左式，$\binom{n}{r}$表示从$n$人选出$r$人授予校级奖学金，$r^{2}$表示从$r$个人中选出2人授予专项奖学金。对于右式，我们先选出授予专项奖学金的同学，再在剩余人中选取其它校级奖学金获得者，如果专项奖学金授予给不同的人，则有$n(n-1)2^{n-2}$种情况，如果专项奖学金授予给同一个人，则有$n2^{n-1}$中情况，于是总计有$n(n-1)2^{n-2}+n2^{n-1}=n(n+1)2^{n-2}$种情况。 \\
+
+Problem 3. \\
+一场选拔赛有$a$只非种子队和$b$只种子队参加，最终只有$a$只队伍可以晋级。其中非种子队需要进行A,B两场比赛，并且全通过才可以晋级；种子队只需要通过比赛B就可以晋级。式子两边以两种方式对所有的情况数进行计数。对于左式，$\binom{a}{i}$表示非种子队中有$i$只队伍通过了比赛A，$\binom{b+i}{a}$表示这$i$只非种子队与另外$b$只种子队参加比赛B，并有$a$只队伍通过了比赛B（晋级）。对于右式，$\binom{a}{i}$表示非种子队有$i$只队伍没有晋级，$2^{i}$是确定这$i$只没有晋级的非种子队是没通过比赛A还是没通过比赛B，$\binom{b}{i}$表示种子队中有i只队伍晋级。 \\
+
+Problem 4. \\
+将$[2n]$分为$n$组：${1,n+1},{2,n+2},\ldots,{n,n+n}$，显然对于任意不同组的两个数，它们的差的绝对值均不等于$n$。因此对于图中相邻两个点，符合题目要求的$\pi (i)$与$\pi (i+1)$必属于同一组。设两个点分别为$a_{1}a_{2}\ldots a_{2n}$，$b_{1}b_{2}\ldots b_{2n}$，则不难看出二者连通，当且仅当对于任意$a_{k}\neq b_{k}$，都有$a_{k},b_{k}$属于同一组，且要么$a_{k}=b_{k+1},a_{k+1}=b_{k}$，要么$a_{k}=b_{k-1},a_{k-1}=b_{k}$。于是大小至少为$i$的连通分量有$\binom{n}{i}(2n-i)!$个，最后由容斥原理得$\Sigma_{i=0}^{n}(-1)^{i}\binom{n}{i}(2n-i)!$。 \\
+
+Problem 5. \\
+此问题可用扔硬币的起伏问题来解释。对于右式，$4^{n}=2^{2n}$，可视为扔$2n$枚硬币的所有可能结果的组合。对于左式，首先我们由反射原理的推论可知扔$2n$枚硬币且任意时刻（除0时刻外）正面出现的次数都不等于反面出现次数的情况数为$\binom{2n}{n}$(*)，其次显然扔$2n$枚硬币且正面出现次数与反面出现次数相等的情况数为$\binom{2n}{n}$(**)，用$k$表示“扔$2n$枚硬币且在$k$时刻正面出现次数与反面出现次数相等，同时在$k$时刻后正面出现的次数与反面出现的次数都不同”的时刻，于是扔$2n$枚硬币的所有可能结果的组合也可表示为前$2k$步的可能(即(*))与后$2n-2k$步可能(即(**))的组合，即为$\Sigma_{k=0}^{n}\binom{2k}{k}\binom{2n-2k}{n-k}$。\\
+
+\end{CJK*}     % 结束中文环境
+\end{document} % 结束正文 

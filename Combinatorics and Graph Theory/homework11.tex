@@ -1,0 +1,53 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{times}                       % 使用 Times New Roman 字体
+\usepackage{CJK,CJKnumb,CJKulem}         % 中文支持宏包
+\usepackage{color}                       % 支持彩色
+\usepackage{amsthm} %数学定理
+\usepackage{amsmath} %数学符号
+\usepackage{amssymb} %数学符号
+\usepackage{indentfirst} %缩进
+\usepackage{graphicx} %图形支持
+\usepackage{mathrsfs} %花体支持
+%——————————–其他宏包——————————
+%\usepackage{amsmath,amsthm,amsfonts,amssymb,bm} % 数学宏包
+%\usepackage{graphicx,psfrag}                    % 图形宏包
+%\usepackage{makeidx}                            % 建立索引宏包
+%\usepackage{listings}                           % 源代码宏包
+%———————————正文———————————–
+% 换行 \\
+% 换页 \clearpage
+\begin{document} % 开始正文
+\begin{CJK*}{GBK}{song}                          % 开始中文环境
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem*{myproof}{Proof}
+\newtheorem*{myexercise}{Exercise}
+\newtheorem*{myproblem}{Problem}
+\setlength{\parindent}{0em}
+\author{Kai Sun(孙锴)}                             % 作者
+\title{Homework 11}                                % 题目
+\maketitle                                        % 生成标题
+Problem 1. \\
+\begin{figure}[h]
+\begin{center}
+\includegraphics[scale = 0.35]{hw11_1}
+\end{center}
+\caption{图1}
+\end{figure}
+如图1所示，$ABC,BCD,AEF,EFG$是边长为1的等边三角形，另外$DG=1$。假设该图可以3染色，则$A,D$颜色相同，$A,G$颜色相同，于是$D,G$颜色相同，矛盾，故该图不能3染色。显然该图可以4染色，故该图的chromatic number为4。 \\
+
+Problem 2. \\
+取出所有方案中线段长度之和最小的方案，断言该方案中不存在相交的线段。因为若存在相交的线段，记$AB$，$CD$相交（其中$A,C$是红的，$B,D$是蓝的），于是由计算几何知识知$|AD|+|CB|<|AB|+|CD|$，这与“方案是长度之和最小的方案”矛盾。\\
+
+Problem 3. \\
+对于任意图$G(V,E)$，其中$|V|=n$，易见对于任意点$i$，由它组成的magic line数（记为$f(i)$）至多有$\frac{n-1}{2}$。于是$\sum_{i\in[n]}f(i)$至多为$n\times \frac{n-1}{2}$。注意到在这种计数方法中，每条magic line恰好被计数了$3$次，故所有magic line的总数不超过$\frac{n(n-1)}{2}/3$，从而不超过$\frac{n^2}{6}$。\\
+
+Problem 4. \\
+不失一般性，设$n$是12的倍数，我们考虑$3\times\frac{n}{3}$的网格。为了方便叙述，我们记$1,2,\ldots,\frac{n}{3}$为第一层，$\frac{n}{3}+1,\ldots,\frac{2n}{3}$为第二层，$\frac{2n}{3}+1,\ldots,n$为第三层。对于第一层的任意点$i$，从它出发的magic line至少有$\frac{n}{12}$条（这是比较明显的，可根据$i$与$\frac{n}{3}/2$的大小比较分两种情况讨论（*）），故magic line的总数至少有$\frac{n}{3}\times \frac{n}{12}=\frac{n^2}{36}$。于是$M_n=\Omega(n^2)$。\\
+（实际上，(*)这步稍微严格地进行分析可获得更好的常数提高，如可以容易地将结果提高至$\frac{n^2}{18}$，但由于没有从阶上影响结果，这里不做进一步讨论）
+
+
+\end{CJK*}     % 结束中文环境
+\end{document} % 结束正文 

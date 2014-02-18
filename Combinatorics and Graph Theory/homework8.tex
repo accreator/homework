@@ -1,0 +1,87 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{times}                       % 使用 Times New Roman 字体
+\usepackage{CJK,CJKnumb,CJKulem}         % 中文支持宏包
+\usepackage{color}                       % 支持彩色
+\usepackage{amsthm} %数学定理
+\usepackage{amsmath} %数学符号
+\usepackage{amssymb} %数学符号
+\usepackage{indentfirst} %缩进
+\usepackage{graphicx} %图形支持
+\usepackage{mathrsfs} %花体支持
+%——————————–其他宏包——————————
+%\usepackage{amsmath,amsthm,amsfonts,amssymb,bm} % 数学宏包
+%\usepackage{graphicx,psfrag}                    % 图形宏包
+%\usepackage{makeidx}                            % 建立索引宏包
+%\usepackage{listings}                           % 源代码宏包
+%———————————正文———————————–
+% 换行 \\
+% 换页 \clearpage
+\begin{document} % 开始正文
+\begin{CJK*}{GBK}{song}                          % 开始中文环境
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem*{myproof}{Proof}
+\newtheorem*{myexercise}{Exercise}
+\newtheorem*{myproblem}{Problem}
+\setlength{\parindent}{0em}
+\author{Kai Sun(孙锴)}                             % 作者
+\title{Homework 8}                                % 题目
+\maketitle                                        % 生成标题
+Problem 1. \\
+\begin{figure}[h]
+\begin{center}
+\includegraphics[scale = 0.35]{hw8_1}
+\end{center}
+\caption{图1}
+\end{figure}
+(a)16种可能情况如上图所示，它们对应的概率分别为：\\
+\begin{tabular}{|r|l|r|l|r|l|r|l|}
+\hline
+1  & $\frac{16}{81}$ & 2  & $\frac{8}{81}$ & 3  & $\frac{8}{81}$ & 4  & $\frac{4}{81}$ \\
+\hline
+5  & $\frac{8}{81}$  & 6  & $\frac{4}{81}$ & 7  & $\frac{4}{81}$ & 8  & $\frac{2}{81}$ \\
+\hline
+9  & $\frac{8}{81}$  & 10 & $\frac{4}{81}$ & 11 & $\frac{4}{81}$ & 12 & $\frac{2}{81}$ \\
+\hline
+13 & $\frac{4}{81}$  & 14 & $\frac{2}{81}$ & 15 & $\frac{2}{81}$ & 16 & $\frac{1}{81}$ \\
+\hline
+\end{tabular} \\
+(b) 我不确定题对$R$的定义是否是指边的导出子图，如果不是（即$R$的顶点集就是$V$），那么$E(X)=1\times \frac{4\times 8+4\times 4+4\times 2+1}{81}+2\times \frac{2\times 4}{81}=\frac{73}{81}$，否则$E(X)=4\times \frac{16}{81}+3\times \frac{4\times 8}{81}+2\times \frac{4\times 4+4\times 2}{81}+1\times \frac{2\times 4 + 1}{81}=\frac{217}{81}$\\
+(c) 因为无论如何染色，B都是二分图，故$E(Y)=1$ \\
+(d) 我不确定题对$R$的定义是否是指边的导出子图，如果不是（即$R$的顶点集就是$V$），那么$Pr(E)=2\times \frac{4}{81}=\frac{8}{81}$，否则$Pr(E)=6\times \frac{4}{81}=\frac{24}{81}$ \\
+
+Problem 2. \\
+当$n=1$时，易见答案为$0$，以下讨论$n>1$的情况。 \\
+定义$X_i$为第$i$步跳的距离，$X=\Sigma_{1\leq i < n} X_i$为跳跃的总距离。 \\
+易见$E(X_1)=E(X_2)=\ldots =E(X_{n-1})=\frac{\Sigma_{1\leq i\neq j\leq n} |i-j|}{n(n-1)}=\frac{n+1}{3}$ \\
+于是当$n>1$时，$E(X)=\Sigma_{1\leq i<n} X_i=\frac{n^2-1}{3}$ \\
+注意到上述公式在$n=1$时同样成立，故$E(X)=\frac{n^2-1}{3}$ \\
+
+Problem 3. \\
+定义
+\begin{displaymath}
+X_i = \left\{ \begin{array}{ll}
+	1 & \textrm{if $i^{th}$ row contains a monotone subsequence of length $t$} \\
+	0 & \textrm{otherwise}
+\end{array} \right.
+\end{displaymath} \\
+定义$X=\Sigma_{i}X_i$，则$E(X)=\Sigma_{i}E(X_i)$。\\
+注意到$E(X_i)=\frac{2\binom{n}{t}\binom{n}{t}(n-t)!}{n!}$（对分子的解释：$n$个位置取$t$个位置，$n$个数取$t$个数，其它位置随便排，考虑单调递增与单调递减），所以
+$E(X)=n\frac{2\binom{n}{t}\binom{n}{t}(n-t)!}{n!}$\\
+当$t\geq 3\sqrt{n}$时，上式$\leq n\frac{2n^{t}}{2\pi t(\frac{t}{e})^{2t}} <1$\\ %\leq \frac{\sqrt{n}}{3\pi (\frac{9}{e^2})^{3\sqrt{n}}}
+
+Problem 4. \\
+由于是二分图，我们将它的两边记为$X$与$Y$。我们首先将颜色集随机（uniformly at random）划分为不相交的$C_X$与$C_Y$，然后我们随机地（uniformly at random）对$X$,$Y$染色。对于每个点$v$，定义事件$Z_v$如下：
+\begin{displaymath}
+Z_v = \left\{ \begin{array}{ll}
+	C_X \cap S(v)=\varnothing & \textrm{if $v\in X$} \\
+	C_Y \cap S(v)=\varnothing & \textrm{if $v\in Y$}
+\end{array} \right.
+\end{displaymath} \\
+于是$Pr(Z_v)=(\frac{1}{2})^{|S(v)|}<\frac{1}{n}$，
+$Pr(U_v Z_v)\leq \Sigma_v Pr(Z_v)<1$，故存在满足题意的染色方案。\\
+
+\end{CJK*}     % 结束中文环境
+\end{document} % 结束正文 

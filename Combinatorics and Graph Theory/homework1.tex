@@ -1,0 +1,50 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{times}                       % 使用 Times New Roman 字体
+\usepackage{CJK,CJKnumb,CJKulem}         % 中文支持宏包
+\usepackage{color}                       % 支持彩色
+\usepackage{amsthm} %数学定理
+\usepackage{amsmath} %数学符号
+\usepackage{amssymb} %数学符号
+\usepackage{indentfirst} %缩进
+\usepackage{graphicx} %图形支持
+%——————————–其他宏包——————————
+%\usepackage{amsmath,amsthm,amsfonts,amssymb,bm} % 数学宏包
+%\usepackage{graphicx,psfrag}                    % 图形宏包
+%\usepackage{makeidx}                            % 建立索引宏包
+%\usepackage{listings}                           % 源代码宏包
+%———————————正文———————————–
+% 换行 \\
+% 换页 \clearpage
+\begin{document} % 开始正文
+\begin{CJK*}{GBK}{song}                          % 开始中文环境
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem*{myproof}{Proof}
+\newtheorem*{myexercise}{Exercise}
+\newtheorem*{myproblem}{Problem}
+\setlength{\parindent}{2em}
+\author{Kai Sun(孙锴)}                             % 作者
+\title{Homework 1}                                % 题目
+\maketitle                                        % 生成标题
+\begin{myproblem}[1]
+(a)$\binom{10}{8}=\dfrac{10!}{8!2!}=\dfrac{9\times 10}{2}=45$ \\
+(b)$1^{-1}=1$, $2^{-1}=4$, $3^{-1}=5$, $4^{-1}=2$, $5^{-1}=3$, $6^{-1}=6$ \\
+(c)$\because$ $449=(3244)_{5}=(111000001)_{2}$, $137=(1022)_{5}=(10001001)_{2}$, $5\times 1\equiv 1(mod\ 2)$, $2\times 3\equiv 1(mod\ 5)$ \\
+$\therefore$ $\binom{449}{137}\equiv \binom{3}{1}\binom{2}{0}\binom{4}{2}\binom{4}{2}\equiv 3\times 1\times 6\times 6\equiv 3 (mod\ 5)$, $\binom{449}{137}\equiv \binom{1}{0}\binom{1}{1}\binom{1}{0}\binom{0}{0}\binom{0}{0}\binom{0}{1}\binom{0}{0}\binom{0}{0}\binom{1}{1}\equiv 0(mod\ 2)$ \\
+$\therefore$ $\binom{449}{137}\equiv 3\times (3\times 2)+0\times (1\times 5)\equiv 8(mod\ 10)$
+\end{myproblem}
+\begin{myproblem}[2]
+$=1+\Sigma_{k=1}^{n} \binom{n}{k} 2^{k}=3^{n}$
+\end{myproblem}
+\begin{myproblem}[3]
+Fill 9x9 squares from 1 to 81. Consider the first time when there exists at least one number in each row or there exists at least one number in each column. WLOG, we discus the first situation. Let $a$ be the last number filled in the array. We claim that in each row there is at least one empty square which is horizontally adjacent to a non-empty square, because otherwise there must exist one row in which there is no empty square, which should be the second situation. Therefore there exists at least 9 empty squares which are adjacent to a non-empty square. As every non-empty square is filled a number less than or equal to $a$, among the 9 empty squares there must exist one square which is adjacent to a non-empty square filled with a number less than or equal to $a-8$. We use $X$ to denote one of the empty square which is adjacent to a non-empty square filled with a number less than or equal to $a-8$. However, all the numbers which are going to use to fill the squares are greater than or equal to $a+1$, so no matter what the number we fill $X$ with, $X$ always has a neighbour which is different from $X$ with at least 9.
+\end{myproblem}
+\begin{myproblem}[4]
+For any different persons $a,b,c$, if $\overline{ab}$ and $\overline{ac}$ are the same club, then we know that $abc$ is fun triples. As $\overline{ab}$ and $\overline{ac}$ are same, for any person $d$ which is different from $a,b,c$, either both $abd$ and $acd$ are fun triples, or neither $abd$ nor $acd$ are fun triples. Therefore $bcd$ are fun triples because we know that among any 4 people, the number of fun triples are even. Because $d$ can be any number except $a,b,c$, $\overline{bc}$ is a club of size $n$.
+
+If there exists no club of size $n$, let $X$ be a club and $t_{0}$ be a person who is not in $X$, and use $t_{1},t_{2},...,t_{n-1}$ to denote the other $n-1$ persons. Then $\overline{t_{0}t_{1}},\overline{t_{0}t_{1}},...,\overline{t_{0}t_{n-1}}$ are $n-1$ different club. And because $t_{0}$ is not in $X$, $X$ is different from $\overline{t_{0}t_{1}},\overline{t_{0}t_{1}},...,\overline{t_{0}t_{n-1}}$. Therefore,  $\overline{t_{0}t_{1}},\overline{t_{0}t_{1}},...,\overline{t_{0}t_{n-1}},X$ are n different clubs.
+\end{myproblem}
+\end{CJK*}     % 结束中文环境
+\end{document} % 结束正文 

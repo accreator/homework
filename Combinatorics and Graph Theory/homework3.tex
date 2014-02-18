@@ -1,0 +1,87 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{times}                       % 使用 Times New Roman 字体
+\usepackage{CJK,CJKnumb,CJKulem}         % 中文支持宏包
+\usepackage{color}                       % 支持彩色
+\usepackage{amsthm} %数学定理
+\usepackage{amsmath} %数学符号
+\usepackage{amssymb} %数学符号
+\usepackage{indentfirst} %缩进
+\usepackage{graphicx} %图形支持
+\usepackage{mathrsfs} %花体支持
+%——————————–其他宏包——————————
+%\usepackage{amsmath,amsthm,amsfonts,amssymb,bm} % 数学宏包
+%\usepackage{graphicx,psfrag}                    % 图形宏包
+%\usepackage{makeidx}                            % 建立索引宏包
+%\usepackage{listings}                           % 源代码宏包
+%———————————正文———————————–
+% 换行 \\
+% 换页 \clearpage
+\begin{document} % 开始正文
+\begin{CJK*}{GBK}{song}                          % 开始中文环境
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem*{myproof}{Proof}
+\newtheorem*{myexercise}{Exercise}
+\newtheorem*{myproblem}{Problem}
+\setlength{\parindent}{0em}
+\author{Kai Sun(孙锴)}                             % 作者
+\title{Homework 3}                                % 题目
+\maketitle                                        % 生成标题
+Problem 1. \\
+对于任意$(a,b)$，\\
+若$a>b$，则$\mu (a,b)=0\neq -1$；\\
+若$a=b$，则$\mu (a,b)=1\neq -1$；\\
+若$a<b$且$a\nmid b$，则$\mu (a,b)=0\neq -1$；\\
+下面讨论$a<b$且$a\mid b$的情况，设$\frac{b}{a}=p_{1}^{a_1}p_{2}^{a_2}\ldots p_{m}^{a_m}$，其中$p_{i}$为素数，则\\
+\begin{displaymath}
+\mu (a,b)=\mu (1,\frac{b}{a})= = \left\{ \begin{array}{ll}
+	(-1)^{\Sigma_{i}a_{i}} & \textrm{if $a_{i}\leq 1$ for all $i$} \\
+	0 & \textrm{otherwise}
+\end{array} \right.
+\end{displaymath} \\
+在$[100]$中可分解为奇数个素因子，且每个素因子至多出现一次的数如下：\\
+$2,3,5,7,11,13,17,19,$ \\
+$23,29,30,31,37,$ \\
+$41,42,43,47,53,59,$ \\
+$61,66,67,70,71,73,78,79,$ \\
+$83,89,97$ \\
+用$f(x)$表示小于等于$x$且在上表中的数的个数，则满足条件的$(a,b)$数为 \\
+$\Sigma_{i=1}^{100}f(\lfloor x/i\rfloor)=(50-34+1)\times 1+(33-21+1)\times 2+(20-15+1)\times 3+(14-10+1)\times 4+(9-8+1)\times 5+6+6+8+9+12+17+30=179$ \\
+于是$P(\mu (a,b)=-1)=\frac{179}{100\times 100}=\frac{179}{10000}$。 \\
+
+Problem 2. \\
+当$k\leq 0$且$n>0$时，$c(n,k)=0$。\\
+下面对k做归纳，证明$k>0$时，对于任意$n>2k$，$c(n,k)$为偶数。\\
+起始步：当$k=1$且$n>2k$时，$c(n,k)=(n-1)!$，为偶数，\\
+归纳步：归纳假设当$k=m-1$且$n>2k$时，$c(n,k)$为偶数，则$k=m$时，进一步对n做归纳：
+\begin{quote}
+起始步：当$n=2k+1=2m+1$，则$c(n,k)=c(n-1,k-1)+(n-1)c(n-1,k)=c(2m,m-1)+2m\cdot c(2m,m)$，由对k做归纳的归纳假设，$c(2m,m-1)$为偶数，又由于$2m\cdot c(2m,m)$显然为偶数，所以$c(n,k)$为偶数。\\
+归纳步：归纳假设$n=2k+s-1$时，$c(n,k)$为偶数，则$n=2k+s$时，$c(n,k)=c(n-1,k-1)+(n-1)c(n-1,k)=c(2k+s-1,k-1)+(n-1)c(2k+s-1,k)$，由对k做归纳的归纳假设，$c(2k+s-1,k-1)$为偶数（因为$2k+s-1>2(k-1)$），由对n做归纳的归纳假设，$c(2k+s-1,k)$为偶数，所以$c(n,k)$为偶数。 \\
+因此由归纳法，当$k=m$时，对于任意$n>2k$，$c(n,k)$为偶数。 
+\end{quote}
+因此由归纳法，当$k>0$时，对于任意$n-2k$，$c(n,k)$为偶数。 \\
+于是$s(n,k)=(-1)^{n-k}c(n,k)$为偶数。\\
+
+Problem 3. \\
+因为$\Sigma_{k=0}^{n}s(n,k)x^{k}=(x)_{n}$，所以$s(100,50)$等于$x(x-1)(x-2)\ldots (x-100+1)$的$x^{50}$项的系数。由于$x(x-1)(x-2)\ldots (x-99)\equiv x^{34}(x-1)^{33}(x+1)^{33}\equiv x^{34}(x^{2}-1)^{33}\ (mod\ 3)$，所以$s(100,50)\ mod\ 3$可转化为求$\binom{33}{(50-34)/2}\ mod\ 3$，由Lucas，$\binom{33}{8}\ mod\ 3=0$，因此$s(100,50)\ mod\ 3=0$。\\
+
+Problem 4. \\
+$S=\{all\ permutations\ of\ [2n]\}$ \\
+$E_{i}=\{x_{1}x_{2}\ldots x_{2n}\in S|\exists 1\leq k\leq 2n-1\ s.t.\ x_{k}+x_{k+1}=2n+1\land (x_{k}=i\lor x_{k+1}=i)\}$ ($1\leq i\leq n$)\\
+$E(M)=|\cap_{i\in M}E_{i}|$ \\
+$N_{j}=\Sigma_{|M|=j}E(M)=\binom{n}{j}2^{j}(2n-j)!$ \\
+上式中，$\binom{n}{j}$是枚举所有的大小为$j$的$[n]$的子集，$2^{j}$是枚举$j$对$x_{k}+x_{k+1}=2n+1$的数对的前后排列（即是$x_{k}>x_{k+1}$还是$x_{k}<x_{k+1}$），$(2n-j)!$是将所有$x_{k}+x_{k+1}=2n+1$的数对看成一个数后，与剩余未配对的数在一起的所有排列方式。 \\
+$N_{0}=|S|=(2n)!$ \\
+由容斥原理，所求解即为$|S-\cup_{1\leq i\leq n} E_{i}|=\Sigma_{0\leq i\leq n}(-1)^{i}N_{i}=\Sigma_{0\leq i\leq n}\binom{n}{i}(-2)^{i}(2n-i)!$ \\
+
+Problem 5. \\
+$\Pi_{t=0}^{k}(1+tx+t^{2}x^{2}+\ldots +t^{n}x^{n})$中$x^{n-k}$的系数由所有满足$\Sigma_{i=1}^{n}a_{i}=n-k$的$1^{a_{1}}2^{a_{2}}\ldots n^{a_{n}}$加和而成。这里$1^{a_{1}}2^{a_{2}}\ldots n^{a_{n}}$有如下组合解释：我们依次将$1,2,\ldots,n$填入第$1,2,\ldots ,k$个partition，这一填充过程的第$i$步将还未填的最小的$a_{i}+1$个数按照以下方式填入partiton中：
+\begin{quote}
+首先将还未填的最小的数填入第$i$个partiton（保证每个partiton中都有元素），然后将剩余的$a_{i}$个数填入前$i$个partition中。
+\end{quote}
+这样共有$i^{a_{i}}$种填法。于是$1^{a_{1}}2^{a_{2}}\ldots n^{a_{n}}$即为按照如上做法填数的方案总数。最后不难看出以上填数方式不重复，且不遗漏地对应于“将$[n]$分入恰好$k$个partition”的每个方案。
+
+\end{CJK*}     % 结束中文环境
+\end{document} % 结束正文 

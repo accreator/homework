@@ -1,0 +1,57 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{times}                       % 使用 Times New Roman 字体
+\usepackage{CJK,CJKnumb,CJKulem}         % 中文支持宏包
+\usepackage{color}                       % 支持彩色
+\usepackage{amsthm} %数学定理
+\usepackage{amsmath} %数学符号
+\usepackage{amssymb} %数学符号
+\usepackage{indentfirst} %缩进
+\usepackage{graphicx} %图形支持
+\usepackage{mathrsfs} %花体支持
+%——————————–其他宏包——————————
+%\usepackage{amsmath,amsthm,amsfonts,amssymb,bm} % 数学宏包
+%\usepackage{graphicx,psfrag}                    % 图形宏包
+%\usepackage{makeidx}                            % 建立索引宏包
+%\usepackage{listings}                           % 源代码宏包
+%———————————正文———————————–
+% 换行 \\
+% 换页 \clearpage
+\begin{document} % 开始正文
+\begin{CJK*}{GBK}{song}                          % 开始中文环境
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem*{myproof}{Proof}
+\newtheorem*{myexercise}{Exercise}
+\newtheorem*{myproblem}{Problem}
+\setlength{\parindent}{0em}
+\author{Kai Sun(孙锴)}                             % 作者
+\title{Homework 7}                                % 题目
+\maketitle                                        % 生成标题
+Problem 1. \\
+%首先$S(2,2)>3$，因为可将$\{1,2,3\}$分为$\{1\}$与$\{2,3\}$，且易见不存在属于同一集合中的$x,y,z$，满足$x+y=z$。\\
+%下面我们证明$S(2,2)=4$，由于已证明$S(2,2)>3$，我们只需证明无论我们将$[4]$如何划分为两个不相交的集合，都存在属于同一集合中的$x,y,z$满足$x+y=z$。由于%可能的情况数不多，我们直接列举所有的情况：\\
+%$[4]=\varnothing \cup {1,2,3,4}$：取$x=1,y=3,z=4$；\\
+%$[4]=\{1\} \cup \{2,3,4\}$：取$x=2,y=2,z=4$；\\
+%$[4]=\{2\} \cup \{1,3,4\}$：取$x=1,y=3,z=4$；\\
+%$[4]=\{3\} \cup \{1,2,4\}$：取$x=2,y=2,z=4$；\\
+%$[4]=\{4\} \cup \{1,2,3\}$：取$x=1,y=2,z=3$；\\
+%$[4]=\{1,2\} \cup \{3,4\}$：取$x=1,y=1,z=2$；\\
+%$[4]=\{1,3\} \cup \{2,4\}$：取$x=2,y=2,z=4$；\\
+考虑$[4]=\{1,4\} \cup \{2,3\}$，易见$\{1,4\}$和$\{2,3\}$都是sum-free的，所以$S(2,2)\geq 4$。下面证明$[5]$不可能划分为两个不相交的集合，使得每个集合都是sum-free的。我们采用反证法，假设$[5]$可划分为两个不相交的集合$A,B$，且$A,B$都是sum-free的，则$1$与$2$必不属于同一集合，不妨设$1\in A$，$2\in B$，因为$2$与$4$必不属于同一集合，所以$4\in A$，因为$\{1,4\}\subseteq A$，所以$3,5$都不属于$A$，故$\{2,3,5\}\subseteq B$，可这时在$B$中有$2+3=5$，与假设矛盾。故$S(2,2)<5$，综上，$S(2,2)=4$。\\
+
+Problem 2. \\
+可令$S^{*}(c,m)=N_c(\frac{m(m+1)}{2}+1;2)$。\\
+对于$[S^{*}(c,m)]$的任意$c$染色$\varphi$，我们将任意$K_{S^{*}(c,m)}$的边$ab$染色为$\varphi(|a-b|)$，于是由拉姆齐定理知存在$a_1<a_2<\ldots < a_{\frac{m(m+1)}{2}+1}$满足对于任意$i\neq j\in [\frac{m(m+1)}{2}+1]$ $a_ia_j$同色。定义：\\
+$k_1=1$ \\
+$k_i=argmin_{j,j>k_{i-1}}\{\nexists l<i\ s.t.\ a_{k_{l}}-a_{k_{l-1}}=a_j-a_{k_{i-1}}\}\ \ \ (i>1)\ (*)$ \\
+则由$a_i$的单调易见当$1\leq i\leq m+1$时$k_i \leq 1+\frac{i(i-1)}{2}$，令$x_i=a_{k_{i+1}}-a_{k_i}$，再令$y=\Sigma_i x_i$则由上述构造可见$x_1,x_2,\ldots,x_m,y$同色，互不相等，且满足$\Sigma_i x_i = y$。\\
+
+Problem 3. \\
+可令$N(c)=N_c(3;2)$。\\
+我们将任意$K_{N(c)}$的边$ab\ (a<b)$染色为$f(\{a,a+1,\ldots,b-1\})$，于是由拉姆齐定理知存在$i<j<k$满足$ij,jk,ik$同色，令$X=\{i,i+1,\ldots,j-1\}, Y=\{j,j+1,\ldots,k-1\}, X\cup Y=\{i,i+1,\ldots,k-1\}$，由上述构造可见$f(X),f(Y),f(X\cup Y)$同色。\\
+
+
+\end{CJK*}     % 结束中文环境
+\end{document} % 结束正文 

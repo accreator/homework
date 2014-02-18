@@ -1,0 +1,68 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{times}                       % 使用 Times New Roman 字体
+\usepackage{CJK,CJKnumb,CJKulem}         % 中文支持宏包
+\usepackage{color}                       % 支持彩色
+\usepackage{amsthm} %数学定理
+\usepackage{amsmath} %数学符号
+\usepackage{amssymb} %数学符号
+\usepackage{indentfirst} %缩进
+\usepackage{graphicx} %图形支持
+\usepackage{mathrsfs} %花体支持
+\newcommand{\ch}{{\cal H}}
+%——————————–其他宏包——————————
+%\usepackage{amsmath,amsthm,amsfonts,amssymb,bm} % 数学宏包
+%\usepackage{graphicx,psfrag}                    % 图形宏包
+%\usepackage{makeidx}                            % 建立索引宏包
+%\usepackage{listings}                           % 源代码宏包
+%———————————正文———————————–
+% 换行 \\
+% 换页 \clearpage
+\begin{document} % 开始正文
+\begin{CJK*}{GBK}{song}                          % 开始中文环境
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem*{myproof}{Proof}
+\newtheorem*{myexercise}{Exercise}
+\newtheorem*{myproblem}{Problem}
+\setlength{\parindent}{0em}
+\author{Kai Sun(孙锴)}                             % 作者
+\title{Homework 9}                                % 题目
+\maketitle                                        % 生成标题
+Problem 1. \\
+给定$n$，我们将$n$个点每$10$个点分为一组，于是可分得$\lfloor\frac{n}{10}\rfloor$个包含$10$个点的组。由于$p$为大于$0$的常数，所以第$i$组的$10$个点的导出子图是Peterson Graph的概率为一大于$0$的常数，我们记之为$q$，于是$Pr(E)\geq 1-(1-q)^{\frac{n}{10}}$，故\[\lim_{n \rightarrow \infty} Pr(E) \rightarrow 1.\] \\
+
+Problem 2. \\
+\begin{figure}[h]
+\begin{center}
+\includegraphics[scale = 0.35]{hw9_1}
+\end{center}
+\caption{图1}
+\end{figure}
+由于$A,B,C,D$是独立集，所以$\alpha(H)\geq 4$。下面用反证法证明$\alpha(H)\leq 4$。若存在大小大于等于$5$的独立集，则不难看出$D$必在该独立集中，于是$B$与$G$、$A$与$F$、$C$与$E$不能共存，从而独立集中元素个数$\leq 4$，矛盾。\\
+综上，$\alpha(H)=4$ \\
+
+Problem 3. \\
+对于图$([n], \binom{[n]}{r})$，我们将属于$\binom{[n(1-\frac{1}{r})]}{r}$的边删掉，我们记剩下的图为$\ch$。显然$\alpha(\ch)\geq n(1-\frac{1}{r})$（因为$[n(1-\frac{1}{r})]$是独立集），下面只需证$\ch$有至少$\binom{n}{r}/e^r$条边。
+因为$\frac{\binom{n(1-\frac{1}{r})}{r}}{\binom{n}{r}}=\Pi_{i=0}^{r-1}\frac{n(1-\frac{1}{r})-i}{n-i}\leq (\frac{n(1-\frac{1}{r})}{n})^r = (1-\frac{1}{r})^{r} \leq e^{-r} \leq 1-e^{-r}$，所以$\binom{n}{r}-\binom{n(1-\frac{1}{r})}{r}\geq \binom{n}{r}/e^r$ \\
+
+Problem 4. \\
+给定$n,m,\ch$，我们以大小为$p$的概率随机选取若干点。接下来进行一个删点的过程：若选取的点中存在属于同一条边的3个点，则随机去掉其中一个。不难看出剩余点数的期望为$np-mp^3$，它们构成了一个独立集。\\
+若$n<3m$，令$p=\sqrt{\frac{n}{3m}}$，则$np-mp^3=\frac{2\sqrt{3}n\sqrt{n}}{9\sqrt{m}}$；\\
+若$n\geq 3m$，令$p=1$，则$c_1\leq \frac{1}{3}$，于是$np-mp^3=n-m\geq \frac{2n}{3} = \frac{2n\sqrt{c_1n}}{3\sqrt{c_1n}} \geq \frac{2\sqrt{c_1}n\sqrt{n}}{3\sqrt{m}}$。\\
+综上，存在常数$c_2$满足$\alpha(\ch)\geq \frac{c_2n\sqrt{n}}{\sqrt{m}}$ \\
+
+Problem 5. \\
+(a) $r=1$时，$A=\{a_1,b_1,c\}$，对$6$种可能进行分组讨论，可得$E_{\delta}[(1+p)^x(1-p)^y]=\frac{1}{3}\times 1+\frac{1}{3}(1+p)(1-p)+\frac{1}{6}(1+p)+\frac{1}{6}(1-p)=1-\frac{p^2}{3}$ \\
+$r=2$时，$\{a_1,a_2,b_1,b_2,c\}$，对$120$种可能进行分组讨论，可得$E_{\delta}[(1+p)^x(1-p)^y]=\frac{1}{5}\times 1+\frac{1}{5}(1-p)^2(1+p)^2+\frac{4}{120}(1-p)^2+\frac{4}{120}(1+p)^2+\frac{1}{10}(1-p)+\frac{1}{10}(1+p)+\frac{1}{10}(1+p)^2(1-p)+\frac{1}{10}(1-p)^2(1+p)+\frac{16}{120}(1+p)(1-p)=1-\frac{2}{3}p^2+\frac{p^4}{5}$ \\
+(b) 令$c_i$为$a_i,b_i$出现于$c$之前的数量，从而$c_i\in \{0,1,2\}$且$(c_1,\ldots,c_r)$是一个长度为$r$的$0-1-2$序列。
+对于$E_{\sigma}[(1+p)^x(1-p)^y|(c_{k_1},c_{k_2},\ldots,c_{k_{j-1}},c_{k_j},c_{k_{j+1}},\ldots,c_{k_r})]$，\\
+若$c_{k_j}=0$，则$E_{\sigma}[(1+p)^x(1-p)^y|(c_{k_1},c_{k_2},\ldots,c_{k_{j-1}},c_{k_j},c_{k_{j+1}},\ldots,c_{k_r})]=E_{\sigma}[(1+p)^x(1-p)^y|(c_{k_1},c_{k_2},\ldots,c_{k_{j-1}},c_{k_{j+1}},\ldots,c_{k_r})]$；\\
+若$c_{k_j}=1$，则由于$a_i,b_i$对称可知$E_{\sigma}[(1+p)^x(1-p)^y|(c_{k_1},c_{k_2},\ldots,c_{k_{j-1}},c_{k_j},c_{k_{j+1}},\ldots,c_{k_r})]=\frac{1}{2}(1+p)E_{\sigma}[(1+p)^x(1-p)^y|(c_{k_1},c_{k_2},\ldots,c_{k_{j-1}},c_{k_{j+1}},\ldots,c_{k_r})]+\frac{1}{2}(1-p)E_{\sigma}[(1+p)^x(1-p)^y|(c_{k_1},c_{k_2},\ldots,c_{k_{j-1}},c_{k_{j+1}},\ldots,c_{k_r})]=E_{\sigma}[(1+p)^x(1-p)^y|(c_{k_1},c_{k_2},\ldots,c_{k_{j-1}},c_{k_{j+1}},\ldots,c_{k_r})]$；\\
+若$c_{k_j}=2$，则$E_{\sigma}[(1+p)^x(1-p)^y|(c_{k_1},c_{k_2},\ldots,c_{k_{j-1}},c_{k_j},c_{k_{j+1}},\ldots,c_{k_r})]=(1+p)(1-p)E_{\sigma}[(1+p)^x(1-p)^y|(c_{k_1},c_{k_2},\ldots,c_{k_{j-1}},c_{k_{j+1}},\ldots,c_{k_r})] \leq E_{\sigma}[(1+p)^x(1-p)^y|(c_{k_1},c_{k_2},\ldots,c_{k_{j-1}},c_{k_{j+1}},\ldots,c_{k_r})]$ \\
+又因为边界$E_{\sigma}[(1+p)^x(1-p)^y|()]=1$，所以 \\
+$E_{\sigma}[(1+p)^x(1-p)^y] = \Sigma_{(c_1,c_2,\ldots,c_r)}P((c_1,c_2,\ldots,c_r)) E_{\sigma}[(1+p)^x(1-p)^y|(c_1,c_2,\ldots,c_r)]\leq \Sigma_{(c_1,c_2,\ldots,c_r)}P((c_1,c_2,\ldots,c_r)) = 1$，从而$E_{\sigma}[(1+p)^x(1-p)^y]\leq 1$ \\
+
+\end{CJK*}     % 结束中文环境
+\end{document} % 结束正文 
