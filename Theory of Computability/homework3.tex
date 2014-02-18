@@ -1,0 +1,143 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{times}                       % 使用 Times New Roman 字体
+\usepackage{CJK,CJKnumb,CJKulem}         % 中文支持宏包
+\usepackage{color}                       % 支持彩色
+\usepackage{amsthm} %数学定理
+\usepackage{amsmath} %数学符号
+\usepackage{amssymb} %数学符号
+\usepackage{indentfirst} %缩进
+\usepackage{graphicx} %图形支持
+\usepackage{mathrsfs} %花体支持
+%——————————–其他宏包——————————
+%\usepackage{amsmath,amsthm,amsfonts,amssymb,bm} % 数学宏包
+%\usepackage{graphicx,psfrag}                    % 图形宏包
+%\usepackage{makeidx}                            % 建立索引宏包
+%\usepackage{listings}                           % 源代码宏包
+%———————————正文———————————–
+% 换行 \\
+% 换页 \clearpage
+\begin{document} % 开始正文
+\begin{CJK*}{GBK}{song}                          % 开始中文环境
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem*{myproof}{Proof}
+\newtheorem*{myexercise}{Exercise}
+\newtheorem*{myproblem}{Problem}
+\setlength{\parindent}{0em}
+\author{Kai Sun(孙锴)}                             % 作者
+\title{Homework 4}                                % 题目
+\maketitle                                        % 生成标题
+Problem 1. \\
+因为$x\in f^{-1}(A)$当且仅当$f(x)\in A$，所以$f^{-1}(A)\leq_{m}A$，由$A$是递归的知$f^{-1}(A)$是递归的。\\
+因为$x\in f^{-1}(B)$当且仅当$f(x)\in B$，所以$f^{-1}(B)\leq_{m}B$，由$B$是递归可列的知$f^{-1}(B)$是递归可列的。下面说明存在$f^{-1}(B)$不是递归的情形：当$B$是递归可列但不是递归的，且$f(x)=x$时，易见$f^{-1}(B)$是递归可列但不是递归的。\\
+因为$A$是递归的，所以$A$是递归可列的，由于
+\begin{displaymath}
+\chi_{f(A)} = \left\{ \begin{array}{ll}
+	1 & \textrm{if $x\in f(A)$} \\
+	\uparrow & \textrm{otherwise}
+\end{array} \right.
+\end{displaymath} \\
+是可计算的（这是易见的，因为只需要递归列出$A$中的元素每个元素$a_i$，然后看$x$是否等于$f(a_i)$，成立则结果为1，否则重复上述过程），所以$f(A)$是递归可列的。下面说明存在$f(A)$不是递归的情形：当$A=\omega$，且
+\begin{displaymath}
+f(x) = \left\{ \begin{array}{ll}
+	\pi_{1}(x) & \textrm{if $P_{\pi_{1}(x)}(\pi_{1}(x))\downarrow\ in\ \pi_{2}(x)\ steps$} \\
+	0 & \textrm{otherwise}
+\end{array} \right.
+\end{displaymath} \\
+时，易见$f(A)=K\cup \{0\}$是递归可列但不是递归的。\\
+同理$f(B)$是递归可列的，且存在$f(B)$不是递归的情形。\\
+如果$f$是双射，则我们知道(1)$x\in B$当且仅当$f(x)\in f(B)$；(2)$x\in f(B)$当且仅当$f^{-1}(x)\in B$，所以$B\equiv f(B)$，同理可证$B\equiv f^{-1}(B)$，$A\equiv f(A)$，$A\equiv f^{-1}(A)$。于是我们可知$f^{-1}(A)$和$f(A)$都是递归的，$f^{-1}(B)$和$f(B)$都是递归可列的。
+
+Problem 2. \\
+由于$A$是递归可列的，所以它的偏特征函数是可计算的，我们用$P$表示对应于该偏特征函数计算的程序。\\
+要说明$\bigcup_{x\in A}W_{x}$是递归可列的，只需说明
+\begin{displaymath}
+\chi_{\bigcup_{x\in A}W_{x}} = \left\{ \begin{array}{ll}
+	1 & \textrm{if $x\in \bigcup_{x\in A}W_{x}$} \\
+	\uparrow & \textrm{otherwise}
+\end{array} \right.
+\end{displaymath} \\
+是可计算的。我们采用以下过程：\\
+(1) $i=1$ \\
+(2) 对$P(0),P(1),\ldots,P(i-1)$执行至多$i$步，用$Q$表示在至多$i$步内终止的输入的集合。 \\
+(3) 取遍$Q=\{q_{0},q_{1},\ldots,q_{j}\}$中的每一个元素$q_{k}$，对$\varphi_{q_{k}}(0),\varphi_{q_{k}}(1),\ldots,\varphi_{q_{k}}(i-1)$执行至多$i$步。由每个在至多$i$步内终止的$\varphi_{q_{k}}(l)$，我们得到$l\in \bigcup_{x\in A}W_{x}$。 \\
+(4) $i=i+1$，重复(2)至(4) \\
+所以$\bigcup_{x\in A}W_{x}$是递归可列的，同理可证$\bigcup_{x\in A}E_{x}$是递归可列的。\\
+现在证明$\bigcap_{x\in A}W_{x}$可能不是递归可列的。设$S(x,t)$表示$\varphi_{x}(x)$在至多$t$步内是否停机，如果是，$S(t,x)=\uparrow$，否则$S(t,x)=0$，由S-m-n定理，存在$\varphi_{k(t)}(x)=S(t,x)$，令$A=\{k(1),k(2),\ldots\}$，则$A$递归可列，但是$\bigcap_{x\in A}W_{x}$是以$x$为输入，永不停机的程序$x$的下标集合，这不是递归可列的。\\
+
+Problem 3. \\
+由于$A\leq_{1} B$，故存在单射的可计算全函数$f'$使得$x\in A$当且仅当$f'(x)\in B$。下面我们描述$f$的构造方式：\\
+因为$A$是递归可列的，所以可以枚举$A$的每个元素$a_{0},a_{1},\ldots$\\
+因为$B$是递归可列的，所以可以枚举$B$的每个元素$b_{0},b_{1},\ldots$\\
+对于每个$x$，如果$x$不是$A$中所列的前$x$个元素，并且目前$f'(x)$没有被用，则令$f(x)=f'(x)$，否则，在$B$中找一个排在最前的目前没有被用的元素$b_j$，令$f(x)=b_j$。\\
+由上述构造方式可见$f$是单射的可计算全函数，且$f(A)=B$。\\
+
+%由于$A\leq_{1} B$，故存在单射的可计算全函数$f'$使得$x\in A$当且仅当$f'(x)\in B$。下面我们描述$f$的构造方式：\\
+%$(1)$i=0$。在以下过程中，我们记第$i$步时我们构造的函数的定义域为$A_{i}$，值域为$B_{i}$\\
+%(2)由于$A,B$是递归可列的，我们用对角线方法对$B$枚举$i$步，如果我们枚举到了一个新的不在$B_{i}$中的元素$b$，那么我们枚举出$A-A_{i}$中的一个元素$a$（由于$A$是无限的，该过程一定可以完成），并令$f(a)=b$。\\
+%(3)如果$i$不在$A_{i}$中，令$f(i)=f'(i)$。\\
+%(4)$i=i+1$，重复(2)至(4) \\
+%由上述构造方式可见$f$是单射的可计算全函数。\\
+
+%由于$A\leq_{1} B$，故存在单射的可计算全函数$f'$使得$x\in A$当且仅当$f'(x)\in B$。下面我们描述$f$的构造方式：\\
+%因为$A$是递归可列的，所以可以枚举$A$的每个元素$a_{0},a_{1},\ldots$，又因为
+%因为$A$是无穷的，所以我们可以从中抽取一个单调递增子列$a_{k_{0}},a_{k_{1}},\ldots$。\\
+%因为$B$是递归可列的，所以可以枚举$B$的每个元素$b_{0},b_{1},\ldots$，又易见$B$是无限的，所以我们可以从中抽取一个子列$b_{l_{0}},b_{l_{1}},\ldots$，满足$\forall j\leq i\ b_{l_{i}}\neq f'(a_{j})$。\\
+%设$f(a_{k_{i}})=$满足$b_{l_{j}}\neq f'(a_{k_{i}})$的第一个$b_{l_{j}}$，在其它点处$f(x)=f'(x)$。可证$f$是单射的可计算全函数且$f(A)=B$。\\
+
+Problem 4. \\
+$Inf\leq_{1} Con$:\\
+定义：
+\begin{displaymath}
+f(x,y) = \left\{ \begin{array}{ll}
+	0 & \textrm{if $\exists z>y\ \varphi_{x}(z)\downarrow$} \\
+	\uparrow & \textrm{otherwise}
+\end{array} \right.
+\end{displaymath} \\
+由S-m-n定理，有$\varphi_{k(x)}(y)=f(x,y)$，易见$k(x)$是$Inf$到$Con$的one-one规约。\\
+$Con\leq_{1} Tot$:\\
+定义
+\begin{displaymath}
+f(x,y) = \left\{ \begin{array}{ll}
+	0 & \textrm{if $\varphi_{x}(y)\downarrow \wedge\forall z<y\ \varphi_{x}(y)=\varphi_{x}(z)$} \\
+	\uparrow & \textrm{otherwise}
+\end{array} \right.
+\end{displaymath} \\
+由S-m-n定理，有$\varphi_{k(x)}(y)=f(x,y)$，易见$k(x)$是$Con$到$Tot$的one-one规约。\\
+$Tot\leq_{1} Inf$:\\
+定义
+\begin{displaymath}
+f(x,y) = \left\{ \begin{array}{ll}
+	0 & \textrm{if $\forall z\leq y\ \varphi_{x}(z)\downarrow$} \\
+	\uparrow & \textrm{otherwise}
+\end{array} \right.
+\end{displaymath} \\
+由S-m-n定理，有$\varphi_{k(x)}(y)=f(x,y)$，易见$k(x)$是$Tot$到$Inf$的one-one规约。\\
+
+Problem 5. \\
+设$A$是一个指标集，对于任意$B$，若有$B\leq_{m} A$，则存在一可计算的全函数$f$满足$x\in A$当且仅当$f(x)\in B$。由于$A$是一指标集，所以我们可以采用“增加垃圾”的方式由$f$构造出单射$f'$且满足$x\in A$当且仅当$f'(x)\in B$，$f'(x)$的构造如下：\\
+\begin{displaymath}
+f'(x) = \left\{ \begin{array}{ll}
+	f(x)\times\underbrace{1\times 1\ldots\times 1}_{f'(x-1)\ times} & \textrm{if $x>0$} \\
+	f(x) & \textrm{if $x=0$}
+\end{array} \right.
+\end{displaymath} \\
+易见上述构造的$f'(x)$为单射，且满足$x\in A$当且仅当$f'(x)\in B$，于是$B\leq_{1}A$。\\
+故所有的指标集都是cylinder。\\
+
+Problem 6. \\
+1. 定义$A=\{x:\varphi_{x}(x)=0\}, B=\{x:\varphi_{x}(x)=1\}$，首先易见$A,B$不相交且都递归可列。假设存在递归集$C$满足$A\subseteq C$且$C\cap B=\varnothing$，则由$C$是递归的知存在$\varphi_{e}$满足：\\
+\begin{displaymath}
+\varphi_{e}(x) = \left\{ \begin{array}{ll}
+	1 & \textrm{if $x \in C$} \\
+	0 & \textrm{otherwise}
+\end{array} \right.
+\end{displaymath} \\
+如果$\varphi_{e}(e)=1$，那么$e\in C$且$e\in B$，这与$C\cap B=\varnothing$矛盾。\\
+如果$\varphi_{e}(e)=0$，那么$e\notin C$且$e\in A$，这与$A\subseteq C$矛盾。\\
+综上，不存在满足$A\subseteq C$且$C\cap B=\varnothing$的$C$，即$A$与$B$是递归不可分的。\\
+2. 目前没想法，我想到解法会再提交给您。 \\
+\end{CJK*}     % 结束中文环境
+\end{document} % 结束正文 

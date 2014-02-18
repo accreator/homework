@@ -1,0 +1,72 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{times}                       % 使用 Times New Roman 字体
+\usepackage{CJK,CJKnumb,CJKulem}         % 中文支持宏包
+\usepackage{color}                       % 支持彩色
+\usepackage{amsthm} %数学定理
+\usepackage{amsmath} %数学符号
+\usepackage{amssymb} %数学符号
+\usepackage{indentfirst} %缩进
+\usepackage{graphicx} %图形支持
+\usepackage{mathrsfs} %花体支持
+%——————————–其他宏包——————————
+%\usepackage{amsmath,amsthm,amsfonts,amssymb,bm} % 数学宏包
+%\usepackage{graphicx,psfrag}                    % 图形宏包
+%\usepackage{makeidx}                            % 建立索引宏包
+%\usepackage{listings}                           % 源代码宏包
+%———————————正文———————————–
+% 换行 \\
+% 换页 \clearpage
+\begin{document} % 开始正文
+\begin{CJK*}{GBK}{song}                          % 开始中文环境
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem*{myproof}{Proof}
+\newtheorem*{myexercise}{Exercise}
+\newtheorem*{myproblem}{Problem}
+\setlength{\parindent}{0em}
+\author{Kai Sun(孙锴)}                             % 作者
+\title{Homework 4}                                % 题目
+\maketitle                                        % 生成标题
+首先更正一下我第三次作业（电子版）的标题错打成了Homework4（只是标题打错了，文件名以及邮件标题没有错误）。\\
+
+Problem 1. \\
+因为$A\cap B$是productive的，所以存在$f$满足：\\
+$W_x\subseteq A\cap B\Rightarrow f(x)\in (A\cap B)\backslash W_x$ ...(1) \\
+因为$B$是递归可列的，对于任意$W_x\subseteq A$，由S-m-n定理知有：\\
+$W_{k(x)}=W_x\cap B\subseteq A\cap B$ ...(2) \\
+由(1)可知，此时有$f(k(x))\in (A\cap B)\backslash W_{k(x)}\subseteq A\backslash W_{x}$ \\
+故$W_x\subseteq A\Rightarrow f(k(x))\in A\backslash W_x$，从而$A$是productive的。\\
+
+Problem 2. \\
+1. 从$\mathcal{A}$中任取一个元素$f$，定义：
+\begin{displaymath}
+h(x,t) = \left\{ \begin{array}{ll}
+	\uparrow & \textrm{if $\phi_x(x)\downarrow$ in $t$ steps} \\
+	f(t) & \textrm{otherwise}
+\end{array} \right.
+\end{displaymath} \\
+由S-m-n定理，有$\phi_{k(x)}(t)=h(x,t)$，于是$\phi_{k(x)}(t)\subset_{f} f$（这里$\subset_{f}$是指有限属于，下同）。于是：\\
+$x\in K \Rightarrow \phi_{k(x)}\subset_{f} f \Rightarrow k(x)\in \overline{A}$\\
+$x\in \overline{K} \Rightarrow \phi_{k(x)}=f \Rightarrow k(x)\in A$ \\
+所以$\overline{K}\leq_{m}A$ \\
+2. 不失一般性只考虑一元多项式函数（因为1中的定理可以容易推广到多元情形，利用此推广可以类似地解决多元多项式函数）。因为多项式函数在所有点处有定义，因此令$\mathcal{A}=\{f:f\ is\ a\ polynomial\ function\}$，由于$\mathcal{A}$满足1中的所有条件，故$A=\{x:\phi_x\ is\ a\ polynomial\ function\}$是productive的。\\
+
+Problem 3. \\
+下面用反证法，假设存在total computable函数$f(x,y)$且满足$\forall x.(y\in \overline{K} \Leftrightarrow f(x,y)\in A_x)$，由S-m-n定理，有$\phi_{k(y)}(x)=f(x,y)$。则任取$y\notin \overline{K}$有$\phi_{k(y)}(x)\notin A_x$对于任意$x$成立，由$A_x$定义可知，$\forall x\ \phi_{\phi_{k(y)}(x)}\neq \phi_x$，这与递归定理矛盾。\\
+
+Problem 4. \\
+$\Rightarrow$：若$W_x \subseteq \overline{A\cup B}$，则$W_x\cup B\subseteq (\overline{A} \cap \overline{B})\cup B = \overline{A}$（因为$A\cap B=\varnothing$），因为$W_x$与$B$均递归可列，由S-m-n定理，有$W_{k(x)}=W_x\cup B$。因为$A$是creative的，所以存在$f$满足$W_y\subseteq \overline{A}\Rightarrow f(y)\in \overline{A}\backslash W_y$，于是$f(k(x))\in \overline{A}\backslash W_{k(x)}=(\overline{A\cup B})\backslash W_x$，所以$\overline{A\cup B}$是productive的，从而$A\cup B$是creative的，即有$A\equiv A\cup B$ \\
+$\Leftarrow$：$\forall W_x$, 若$A\cap W_x=\varnothing$，则有$W_x\subseteq \overline{A}$，且$A\equiv A\cup W_x$，于是存在$f_x$满足$y \in A$当且仅当$f_x(y)\in A\cup W_x$，所以$y\in \overline{A}\Rightarrow f_x(y)\in \overline{A\cup W_x}=\overline{A}\backslash W_x$。由于$A\neq \mathbb{N}$，所以$\exists c\in \overline{A}$，令$g(x)=f_x(c)$，则有$W_x\subseteq \overline{A}\Rightarrow g(x)\in \overline{A}\backslash W_x$，所以$\overline{A}$是productive的，故$A$是creative set。 \\
+
+Problem 5. \\
+1. 首先用反证法证明$A$不是递归的，因为如果$A$是递归的，那么$\overline{A}$是递归的。因为$\overline{A}$是无穷的（由(ii)），所以它是一个无穷的递归可列集，这与$(iii)$矛盾。下面证明$A$不是creative的，因为$\overline{A}$没有无穷的递归可列子集，所以$\overline{A}$不是productive的，因此$A$不是creative的。 \\
+2. 由$f$的构造定义可知$R(f)$满足(i)；由定义知$f(x)>2x$，于是对于任意$n$，$1,2,\ldots,2n$只可能由$f(1),f(2),\ldots,f(n)$取到，于是$1$至$2n$中有至少$n$个数不在$A$中，所以$\overline{A}$是无限的，从而(ii)成立；假设$\overline{A}$有一子集是无穷的递归可列集，设它是可计算函数$\phi_e$的值域，那么$Ran(f)\cap Ran(\phi_e)=\varnothing$，然而由$f$的定义，必存在$z$满足$f(e)=\phi_e(z)$（注意到由$\phi_e$的值域是无穷的，所以$f(e)$必有定义），矛盾，从而(iii)成立。 \\
+
+Problem 6. \\
+不是所有的可计算函数都是C-constructible的。\\
+考虑一个全可计算函数$r$，满足$r(x)>x$，由Gap定理，存在全可计算函数$b(x)$，使得$\textbf{TIME}(b(x))=\textbf{TIME}(r(b(x))$。下面用反证法，假设所有的函数都是C-constructible的，则存在$e$满足$C_e(x)=r(b(x))$，此时$\phi_e\in \textbf{TIME}(r(b(x)))$。又因为$r(b(x))>b(x)$，所以$\phi_e\notin \textbf{TIME}(b(x))$。这与$\textbf{TIME}(b(x))=\textbf{TIME}(r(b(x))$，因此存在不是C-constructible的可计算函数。
+
+\end{CJK*}     % 结束中文环境
+\end{document} % 结束正文 
