@@ -1,0 +1,146 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{times}                       % 使用 Times New Roman 字体
+\usepackage{CJK,CJKnumb,CJKulem}         % 中文支持宏包
+\usepackage{color}                       % 支持彩色
+\usepackage{amsthm} %数学定理
+\usepackage{amsmath} %数学符号
+\usepackage{amssymb} %数学符号
+\usepackage{indentfirst} %缩进
+\usepackage{graphicx} %图形支持
+\usepackage{listings} %源代码插入
+%——————————–其他宏包——————————
+%\usepackage{amsmath,amsthm,amsfonts,amssymb,bm} % 数学宏包
+%\usepackage{graphicx,psfrag}                    % 图形宏包
+%\usepackage{makeidx}                            % 建立索引宏包
+%\usepackage{listings}                           % 源代码宏包
+%———————————正文———————————–
+% 换行 \\
+% 换页 \clearpage
+
+\begin{document} % 开始正文
+\begin{CJK*}{GBK}{song}                           % 开始中文环境
+\newtheorem{theorem}{定理}[section]
+\newtheorem{lemma}{引理}[section]
+\newtheorem{definition}{定义}[section]
+\newtheorem*{myproof}{证明}
+\newtheorem*{myexercise}{练习}
+\setlength{\parindent}{2em}
+\author{孙锴}                                 % 作者
+\title{Homework 5}                                % 题目
+\maketitle                                       % 生成标题
+\begin{myexercise}[1]
+设\begin{displaymath}
+\mathbf{A} =
+\left( \begin{array}{cccc}
+1 & 1 & 1 & 1\\
+1 & 1 & 1 & 1\\
+1 & 1 & 1 & 1\\
+1 & 1 & 1 & 1
+\end{array} \right)
+\end{displaymath}
+则令$|\lambda \mathbf{E} - \mathbf{A}|=0$，有\\
+\begin{displaymath}
+\left| \begin{array}{cccc}
+\lambda-1 & -1 & -1 & -1\\
+-1 & \lambda-1 & -1 & -1\\
+-1 & -1 & \lambda-1 & -1\\
+-1 & -1 & -1 & \lambda-1
+\end{array} \right| = 0
+\end{displaymath}
+从而$(\lambda-4)\lambda^{3}=0$，解得特征值$\lambda=0, 4$。\\
+对于$\lambda=0$，
+\begin{displaymath}
+\lambda\mathbf{E}-\mathbf{A}=\left( \begin{array}{cccc}
+-1 & -1 & -1 & -1\\
+-1 & -1 & -1 & -1\\
+-1 & -1 & -1 & -1\\
+-1 & -1 & -1 & -1
+\end{array} \right) \rightarrow
+\left( \begin{array}{cccc}
+1 & 1 & 1 & 1\\
+0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0
+\end{array} \right)
+\end{displaymath}
+从而求得特征值0对应的特征向量为
+\begin{displaymath}
+k_{1}
+\left( \begin{array}{c}
+1\\
+-1\\
+0\\
+0
+\end{array} \right)
++k_{2}
+\left( \begin{array}{c}
+1\\
+0\\
+-1\\
+0
+\end{array} \right)
++k_{3}
+\left( \begin{array}{c}
+1\\
+0\\
+0\\
+-1
+\end{array} \right)
+\end{displaymath}
+其中$k_{1}, k_{2}, k_{3}$不同时为0。\\
+对于$\lambda=4$，
+\begin{displaymath}
+\lambda\mathbf{E}-\mathbf{A}=\left( \begin{array}{cccc}
+3 & -1 & -1 & -1\\
+-1 & 3 & -1 & -1\\
+-1 & -1 & 3 & -1\\
+-1 & -1 & -1 & 3
+\end{array} \right) \rightarrow
+\left( \begin{array}{cccc}
+1 & 0 & 0 & -1\\
+0 & 1 & 0 & -1\\
+0 & 0 & 1 & -1\\
+0 & 0 & 0 & 0
+\end{array} \right)
+\end{displaymath}
+从而求得特征值4对应的特征向量为
+\begin{displaymath}
+k
+\left( \begin{array}{c}
+-1\\
+-1\\
+-1\\
+-1
+\end{array} \right)
+\end{displaymath}
+其中$k\neq 0$
+\end{myexercise}
+\begin{myexercise}[4.7]
+考虑右奇异向量的定义，$\mathbf{v_{1}}=argmax_{|\mathbf{v}|=1}|A\mathbf{v}|$，$\mathbf{v_{k}}=argmax_{|\mathbf{v}|=1, \mathbf{v}\bot \mathbf{v_{1}},\mathbf{v_{2}},\ldots,\mathbf{v_{k-1}}}|A\mathbf{v}|$，从而不难看出$\mathbf{v_{i}}$为对文章的分类（如果有r个正交向量，则将文章分为了r类），其中对于每个$\mathbf{v_{i}}$，其第j个元素表示文章分类i与单词j的关系，数字越大说明单词j对分类i的影响越大。\\
+再考虑左奇异向量的定义，$\mathbf{u_{i}}=\frac{1}{\sigma_{i}(A)}A\mathbf{v_{i}}$，从而不难看出$\mathbf{u_{i}}$为文章分类与各文章的关系，其中对于每个$\mathbf{u_{i}}$，其第j个元素表示文章j与文章分类i的联系，数字越大说明文章j与文章分类i越相关。\\
+\end{myexercise}
+\begin{myexercise}[4.10]
+1.$A^{T}A$=$(\sum_{i=1}^{r}\sigma_{i}\mathbf{u_{i}}\mathbf{v_{i}}^{T})^{T}(\sum_{i=1}^{r}\sigma_{i}\mathbf{u_{i}}\mathbf{v_{i}}^{T})=(\sum_{i=1}^{r}\sigma_{i}\mathbf{v_{i}}\mathbf{u_{i}}^{T})(\sum_{i=1}^{r}\sigma_{i}\mathbf{u_{i}}\mathbf{v_{i}}^{T})=\sum_{i=1}^{r}\sum_{j=1}^{r}\sigma_{i}\mathbf{v_{i}}\mathbf{u_{i}}^{T}\sigma_{j}\mathbf{u_{j}}\mathbf{v_{j}}^{T}=\sum_{i=1}^{r}\sigma_{i}^{2}\mathbf{v_{i}}\mathbf{v_{i}}^{T}$\\
+2.对第1问所证的结果右乘$\mathbf{v_{i}}$，则$A^{T}A\mathbf{v_{i}}=\sum_{j=1}^{r}\sigma_{j}^{2}\mathbf{v_{j}}\mathbf{v_{j}}^{T}\mathbf{v_{i}}$，化简即得$A^{T}A\mathbf{v_{i}}=\sigma_{i}^{2}\mathbf{v_{i}}$，所以$\mathbf{v_{i}}$是$A^{T}A$的特征向量。\\
+3.本题我认为有问题，之所以如此，可以从以下两方面来说明：(1)任意矩阵的特征向量集合均非唯一(特征向量的非0倍均为特征向量)，即假设不成立。我认为应该说明为“单位化的正特征向量集合唯一”。(2)本问应该与1,2问有关系，如果按照1,2问的思路，则应推得$A^{T}A$的单位化的正特征向量集唯一，而由$A$的单位化的正特征向量集唯一无法推得此结论，一个反例为：
+\begin{displaymath}
+A=
+\left( \begin{array}{cc}
+1 & 0\\
+0 & -1
+\end{array} \right)
+\end{displaymath}
+其单位正特征向量集唯一，但是
+\begin{displaymath}
+A^{T}A=
+\left( \begin{array}{cc}
+1 & 0\\
+0 & 1
+\end{array} \right)
+\end{displaymath}
+其单位正特征向量集不唯一。\\
+本题我认为本意是假定$A^{T}A$的单位化的正特征向量集合唯一，那么$A$的奇异值集合唯一。如果题意如此，则由第二问结论可知，$\sigma_{i}^{2}$是$A^{T}A$唯一的特征值，则$\sigma_{i}$唯一，即奇异值集合唯一。\\
+\end{myexercise}
+\end{CJK*}     % 结束中文环境
+\end{document} % 结束正文 

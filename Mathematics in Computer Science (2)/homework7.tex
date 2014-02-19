@@ -1,0 +1,113 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{times}                       % 使用 Times New Roman 字体
+\usepackage{CJK,CJKnumb,CJKulem}         % 中文支持宏包
+\usepackage{color}                       % 支持彩色
+\usepackage{amsthm} %数学定理
+\usepackage{amsmath} %数学符号
+\usepackage{amssymb} %数学符号
+\usepackage{indentfirst} %缩进
+\usepackage{graphicx} %图形支持
+\usepackage{listings} %源代码插入
+
+\usepackage{float} %处理图片位置
+%——————————–其他宏包——————————
+%\usepackage{amsmath,amsthm,amsfonts,amssymb,bm} % 数学宏包
+%\usepackage{graphicx,psfrag}                    % 图形宏包
+%\usepackage{makeidx}                            % 建立索引宏包
+%\usepackage{listings}                           % 源代码宏包
+%———————————正文———————————–
+% 换行 \\
+% 换页 \clearpage
+
+\begin{document} % 开始正文
+\begin{CJK*}{GBK}{song}                           % 开始中文环境
+\newtheorem{theorem}{定理}[section]
+\newtheorem{lemma}{引理}[section]
+\newtheorem{definition}{定义}[section]
+\newtheorem*{myproof}{证明}
+\newtheorem*{myexercise}{练习}
+\setlength{\parindent}{2em}
+\author{孙锴}                                 % 作者
+\title{Homework 7}                                % 题目
+\maketitle                                       % 生成标题
+\begin{myexercise}[5.1]
+1.如下图，图中有两个环，分别长为6和9，满足$gcd(6,9)=3$。\\
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{hw71}
+\end{figure}
+2.(1)“G是二分图$\Rightarrow$G不含奇环”\\
+反证法：设G是任意一个二分图，若G含有长度为m奇环$v_{1},v_{2},\ldots,v_{m}$，则由二分图的定义，G中的点可以分为两个集合（设为A，B），且同一集合中的任意两点不相邻。所以$v_{1}$与$v_{2}$不在同一集合，$v_{2}$与$v_{3}$不在同一集合，$\ldots$，$v_{m-1}$与$v_{m}$，$v_{m}$与$v_{1}$不在同一集合。不妨设$v_{1}\in A$，则$v_{2}\notin A$，从而$v_{2}\in B$，同理可知$v_{3}\in A$，$v_{4}\in B$，$\ldots$，$v_{m}\in A$，由$v_{m}\in A$知$v_{1}\in B$，这与$v_{1}\in A$矛盾。从而证明了G不含奇环。\\
+(2)“G不含奇环$\Rightarrow$G是二分图”\\
+不难看出如果一个图不连通，那么要证明这个图是二分图只须证明这个图的每个连通块都是二分图。所以下面不妨设G是连通图。在G中任取一点v，设$A=\{u|$从点v到点u至少要经过的点的数量为偶数$\}$，$B=\{u|$从点v到点u至少要经过的点的数量为奇数$\}$。显然$A\cup B$即为G中所有点的集合，且$A\cap B=\emptyset$。下面只须证明A中的任意两点不相邻，B中的任意两点不相邻。因为若两点相邻，则必有v到二者至少经过的点的数量的奇偶性不同，从而相邻点必不在同一集合，从而证明了G为二分图。\\
+3.设二分图的点集分为的两个集合为A与B，则任意奇数次随机行走所到的点要么均属于A，要么均属于B，不妨设所到的点均属于A，则任意偶数次随机行走所到的点均属于B，所以稳定的状态概率不存在。\\
+\end{myexercise}
+\begin{myexercise}[5.3]
+由欧姆定律，$U=i_{1}(R_{1}+R_{3})=i_{2}R_{2}$，其中U是电路两端电压。\\
+由基尔霍夫定律，$I=i_{1}+i_{2}$，其中I是输入电流。\\
+由欧姆定律，$R_{eff}=\frac{U}{I}=\frac{i_{2}R_{2}}{i_{1}+i_{2}}=\frac{R_{1}R_{2}+R_{2}R_{3}}{R_{1}+R_{2}+R_{3}}$。\\
+\end{myexercise}
+\begin{myexercise}[5.5]
+$\because I_{ab}=\frac{U_{ab}}{R_{ab}}$\\
+$I_{ad}=I_{ab}-I_{ac}$\\
+$I_{cd}=I_{ac}-I_{cb}$\\
+$I_{db}=I_{ab}-I_{cb}$\\
+$0=U_{aa}=U_{ac}+U_{cd}+U_{da}=I_{ac}+I_{cd}-2I_{ad}=I_{ac}+I_{ac}-I_{cb}-2(I_{ab}-I_{ac})=4I_{ac}-I_{cb}-2I_{ab}$\\
+$0=U_{cc}=U_{cb}+U_{bd}+U_{dc}=2I_{cb}-I_{db}-I_{cd}=2I_{cb}-(I_{ab}-I_{cb})-(I_{ac}-I_{cb})=4I_{cb}-I_{ac}-I_{ab}$\\
+$\therefore 4I_{ac}-I_{cb}=2\frac{U_{ab}}{R_{ab}}$\\
+$4I_{cb}-I_{ac}=\frac{U_{ab}}{R_{ab}}$\\
+$\therefore I_{ac}=0.6\times \frac{U_{ab}}{R_{ab}}$\\
+$I_{cb}=0.4\times \frac{U_{ab}}{R_{ab}}$\\
+$I_{ad}=0.4\times \frac{U_{ab}}{R_{ab}}$\\
+$I_{db}=0.6\times \frac{U_{ab}}{R_{ab}}$\\
+$I_{cd}=0.2\times \frac{U_{ab}}{R_{ab}}$\\
+$\because I_{ac}+2I_{cb}=U_{ab}$\\
+$\therefore R_{ab}=1.4$\\
+运用上述所推结果，得：
+(a)代入a,b点电压，得c点电压为$2I_{cb}=\frac{4}{7}$，d点电压为$I_{db}=\frac{3}{7}$。\\
+(b)（这里a,b电压取(a)中定义），得$I_{ac}=\frac{3}{7}$，$I_{ad}=\frac{2}{7}$，$I_{cd}=\frac{1}{7}$，$I_{cb}=\frac{2}{7}$，$I_{db}=\frac{3}{7}$\\
+(c)$R_{eff}=R_{ab}=1.4$\\
+(d)$p_{ac}=\frac{c_{ac}}{c_{a}}=\frac{2}{3}$\\
+同理$p_{ad}=\frac{1}{3}$，$p_{ca}=\frac{2}{5}$，$p_{cd}=\frac{2}{5}$，$p_{cb}=\frac{1}{5}$，$p_{da}=\frac{1}{5}$，$p_{dc}=\frac{2}{5}$，$p_{db}=\frac{2}{5}$，$p_{bc}=\frac{1}{3}$，$p_{bd}=\frac{2}{3}$。\\
+(e)概率即等价于$v_{a}=1,v_{b}=0$时的$v_{c}$与$v_{d}$，即概率分别为$\frac{4}{7}$和$\frac{3}{7}$\\
+(f)概率即等价于$v_{a}=1,v_{b}=0$时的$I_{cd}$，即概率为$\frac{1}{7}$\\
+(g)概率即$1-p_{escape}=1-\frac{c_{eff}}{c_{a}}=\frac{11}{21}$\\
+\end{myexercise}
+\begin{myexercise}[5.9]
+(1)由于在环上，所以$h_{1,2}=h_{2,3}=\ldots=h_{n-1,n}=h_{n,1}$，记$a_{1}=h_{1,2}$。类似的，记$a_{2}=h_{1,3}, a_{3}=h_{1,4}, \ldots, a_{n-1}=h_{1, n}$。特别的，记$a_{0}=0$\\
+$\because h_{2,3}=\frac{1}{2}+\frac{1}{2}(1+h_{1,3})$\\
+$h_{2,4}=\frac{1}{2}(1+h_{2,3})+\frac{1}{2}(1+h_{1,4})$\\
+$h_{2,5}=\frac{1}{2}(1+h_{2,4})+\frac{1}{2}(1+h_{1,5})$\\
+$\ldots$\\
+$h_{2,n}=\frac{1}{2}(1+h_{2,n-1})+\frac{1}{2}(1+h_{1,n})$\\
+$\therefore a_{i}=2a_{i-1}-a_{i-2}-2$，$2\leq i\leq n-1$\\
+求解递推关系，得$a_{i}=ia_{1}-i(i-1)$\\
+从而有$a_{n-1}=(n-1)a_{1}-(n-1)(n-2)$\\
+$\because a_{n-1}=h_{1,n}=h_{n,1}=a_{1}$\\
+$\therefore a_{1}=n-1$\\
+即相邻两点的$h_{uv}=n-1$\\
+(2)当$(u,v)$被去除后，不妨设$u=1,v=n$，则有$h_{i,i+1}=\frac{1}{2}+\frac{1}{2}(1+h_{i-1,i+1})=\frac{1}{2}+\frac{1}{2}(1+h_{i-1,i}+h_{i,i+1})$\\
+即有$h_{i,i+1}=2+h_{i-1,i}$\\
+求解递推关系，得$h_{i,i+1}=2i-1$\\
+从而$h_{1,n}=\sigma_{i=1}^{n-1}h_{i,i+1}=(n-1)^{2}$\\
+即$h_{uv}=(n-1)^{2}$\\
+\end{myexercise}
+\begin{myexercise}[5.10]
+%利用上一题的结论，\\
+%第一幅图：$h_{2,3}=1$，$h_{3,4}=3$，$h_{3,2}=3$，$h_{4,3}=1$\\
+%第二幅图：$h_{1,2}=1$，$h_{2,3}=3$，$h_{3,4}=5$，$h_{2,1}=5$，$h_{3,2}=3$，$h_{4,3}=1$\\
+%第三幅图：$h_{2,3}=h_{3,4}=h_{4,2}=h_{3,2}=h_{4,3}=h_{2,4}=2$\\
+第一幅图：$h_{uv}=\frac{1}{3}+\frac{1}{3}(2+h_{uv})+\frac{1}{3}(2+h_{uv})$，解得$h_{uv}=5$\\
+第二幅图：
+\begin{figure}[H]
+\centering
+\includegraphics[scale=1.0]{hw72}
+\end{figure}
+$\ $\\
+$\because h_{uv}=\frac{1}{3}+\frac{1}{3}(2+h_{uv})+\frac{1}{3}(1+h_{bu}+h_{uv})$，其中由习题$5.9$结论，$h_{bu}=3$\\
+$\therefore h_{uv}=7$\\
+第三幅图：显然$h_{uv}=1$\\
+\end{myexercise}
+\end{CJK*}     % 结束中文环境
+\end{document} % 结束正文 

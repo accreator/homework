@@ -1,0 +1,64 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{times}                       % 使用 Times New Roman 字体
+\usepackage{CJK,CJKnumb,CJKulem}         % 中文支持宏包
+\usepackage{color}                       % 支持彩色
+\usepackage{amsthm} %数学定理
+\usepackage{amsmath} %数学符号
+\usepackage{amssymb} %数学符号
+\usepackage{indentfirst} %缩进
+\usepackage{graphicx} %图形支持
+%——————————–其他宏包——————————
+%\usepackage{amsmath,amsthm,amsfonts,amssymb,bm} % 数学宏包
+%\usepackage{graphicx,psfrag}                    % 图形宏包
+%\usepackage{makeidx}                            % 建立索引宏包
+%\usepackage{listings}                           % 源代码宏包
+%———————————正文———————————–
+% 换行 \\
+% 换页 \clearpage
+
+\begin{document} % 开始正文
+\begin{CJK*}{GBK}{song}                           % 开始中文环境
+\newtheorem{theorem}{定理}[section]
+\newtheorem{lemma}{引理}[section]
+\newtheorem{definition}{定义}[section]
+\newtheorem*{myproof}{证明}
+\newtheorem*{myexercise}{练习}
+\setlength{\parindent}{2em}
+\author{孙锴}                                 % 作者
+\title{Homework 1}                                % 题目
+\maketitle                                       % 生成标题
+\begin{myexercise}[2.11]
+$\because V(d)=\frac{\pi^{\frac{d}{2}}}{\frac{d}{2}\Gamma (\frac{d}{2})}$ \\
+$\therefore \frac{V(d)}{V(d-1)}=\pi^{\frac{1}{2}}\frac{d-1}{d}\frac{\Gamma (\frac{d-1}{2})}{\Gamma (\frac{d}{2})}$ $(*)$\\
+$\because$$d$为偶数时$\Gamma (\frac{d}{2})=(\frac{d}{2}-1)!$，$n$为奇数时$\Gamma (\frac{d}{2})=(\frac{d}{2}-1)(\frac{d}{2}-2)\ldots(\frac{1}{2}\sqrt{\pi})$ \\
+当$d$为偶数时,$(*)=\frac{(\frac{d-1}{2})(\frac{d-1}{2}-1)(\frac{d-1}{2}-2)\ldots(\frac{1}{2})}{(\frac{d}{2})(\frac{d}{2}-1)(\frac{d}{2}-2)\ldots(1)}\pi$%
+$=\frac{(d-1)!!}{d!!}\pi$\\
+从而可见在$d$为偶数的前提下，$d\leq4$时$(*)>1$，$d\geq6$时$(*)<1$ (**)\\
+当$d$为奇数时,$(*)=\frac{(d-1)(\frac{d-1}{2}-1)(\frac{d-1}{2}-2)\ldots(1)}{d(\frac{d}{2}-1)(\frac{d}{2}-2)\ldots(\frac{1}{2})}$%
+$=2\frac{(d-1)!!}{d!!}$\\
+从而可见在$d$为奇数的前提下，$d\leq5$时$(*)>1$，$d\geq7$时$(*)<1$ (***)\\
+由(**)(***)可得，$V(d)$在$d=5$时取得最大值。
+\end{myexercise}
+\begin{myexercise}[2.12]
+$\because V(d,2)=\int_{S^{d}} d\Omega \int_{0}^{2} dr=\frac{2^{d}}{d}A(d,1)=2^{d}V(d,1)$\\
+$\therefore V(d,2)=2^d\frac{\pi^{\frac{d}{2}}}{\frac{d}{2}\Gamma (\frac{d}{2})}=\frac{(4\pi)^{\frac{d}{2}}}{\frac{d}{2}\Gamma (\frac{d}{2})}$\\
+$\because$ 分式中分子部分为指数形态，而分母部分为阶乘形态\\
+$\therefore $ 除了当$d$在一个有限范围内时$V(d,2)$随着$d$的增大而增大外，当$d$充分大时$V(d,2)$随$d$的增大而减小，$d$趋向无穷时$V(d,2)$趋向于$0$。\\
+同理，当$r>2$且$r$与$d$不相关时，$V(d,r)=\frac{(r^2\pi)^{\frac{d}{2}}}{\frac{d}{2}\Gamma (\frac{d}{2})}$\\
+除了当$d$在一个有限范围内时$V(d,r)$随着$d$的增大而增大外，当$d$充分大时$V(d,r)$随$d$的增大而减小，$d$趋向无穷时$V(d,r)$趋向于$0$。\\
+令$c=\frac{(r^{2}\pi)^{\frac{d}{2}}}{\frac{d}{2}\Gamma (\frac{d}{2})}$，则有$r=\frac{\sqrt[d]{\frac{cd}{2}\Gamma(\frac{d}{2})}}{\sqrt{\pi}}$
+\end{myexercise}
+\begin{myexercise}[2.17]
+设d维空间中圆柱高为$h$，则其体积为$\int_{x=0}^{h}V(d-1,\sqrt{1-h^2})dx=\int_{x=0}^{h}(1-h^{2})^{\frac{d-1}{2}}V(d-1,1)dx=V(d-1,1)h(1-h^{2})^{\frac{d-1}{2}}$\\
+设$f(x)=x(1-x^{2})^{\frac{d-1}{2}}$，则$f^{'}(x)=(1-x^{2})^{\frac{d-3}{2}}(1-dx^{2})$，令$f^{'}(x)=0$，解得$x=\pm 1,\pm \sqrt{\frac{1}{d}}$，从而得当$x>0$时，$f(x)$在$x=\sqrt{\frac{1}{d}}$处取得最大值，因此$h=\sqrt{\frac{1}{d}}$时圆柱体积取得最大值。
+\end{myexercise}
+\begin{myexercise}[2.20]
+这种感官上的"错误"源于以对三维的认识去理解多维的情况。我认为可以从以下几方面说明这个问题：\\
+(1)展示在纸张上的多维球是将两个维度展开而将另外d-2个维度压缩，以三维球理解多维球的一种方法是将三个维度展开而将另外d-3个维度压缩。但是这两种理解方式，当$d>3$时，压缩的维度$\geq2$，实际上这已经是在三维世界中难以体验到的情景（试想一个三维球如果在一维空间中观察，它的2个维度均被压缩，你看到的仅仅是一条线）。本题中提到的问题，正是在于我们用前面所提到的两种理解方式，凭借观察二维和三维情形（且压缩的维度至多只有一维）的经验，去理解并未有直观体验的高维世界产生的所谓错觉。\\
+(2)一个合理的解释来自代数，设$\vec a=(a_{1}, a_{2}, \ldots, a_{d})$与$\vec b=(b_{1}, b_{2}, \ldots, b_{d})$为两个d维球面上的向量，则$\vec a\cdot \vec b=a_{1}b_{1}+a_{2}b_{2}+\ldots+a_{d}b_{d}$，不难得到$\lim_{d\rightarrow \infty} P(\vec a\cdot \vec b=0)=1$，即当维度趋向无穷时，由球心到球面的任意两向量都趋近于相互垂直。因此，在高维情形中，无论如何选择北极点，球面上的点均分布在赤道附近(将球心到北极点看成一个向量，将球心到球面上的某点看成另一个向量，判断球面的点是否在赤道附近只须判断这两个向量的点积是否趋近于0)。\\
+(3)另外一个解释同样来自代数，我们可以证明对于任意两个赤道$A,B$，都有$lim_{d\rightarrow \infty}\frac{|A\cap B|}{|A|}=1$。即高维情形中任意两个选定的北极点对应的赤道的重合度非常高。这种解释本质可以由(2)推得，同时也可以采用另外的代数方法推倒得到。
+
+\end{myexercise}
+\end{CJK*}     % 结束中文环境
+\end{document} % 结束正文 

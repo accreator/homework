@@ -1,0 +1,158 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{times}                       % 使用 Times New Roman 字体
+\usepackage{CJK,CJKnumb,CJKulem}         % 中文支持宏包
+\usepackage{color}                       % 支持彩色
+\usepackage{amsthm} %数学定理
+\usepackage{amsmath} %数学符号
+\usepackage{amssymb} %数学符号
+\usepackage{indentfirst} %缩进
+\usepackage{graphicx} %图形支持
+\usepackage{listings} %源代码插入
+%——————————–其他宏包——————————
+%\usepackage{amsmath,amsthm,amsfonts,amssymb,bm} % 数学宏包
+%\usepackage{graphicx,psfrag}                    % 图形宏包
+%\usepackage{makeidx}                            % 建立索引宏包
+%\usepackage{listings}                           % 源代码宏包
+%———————————正文———————————–
+% 换行 \\
+% 换页 \clearpage
+
+\begin{document} % 开始正文
+\begin{CJK*}{GBK}{song}                           % 开始中文环境
+\newtheorem{theorem}{定理}[section]
+\newtheorem{lemma}{引理}[section]
+\newtheorem{definition}{定义}[section]
+\newtheorem*{myproof}{证明}
+\newtheorem*{myexercise}{练习}
+\setlength{\parindent}{2em}
+\author{孙锴}                                 % 作者
+\title{Homework 3}                                % 题目
+\maketitle                                       % 生成标题
+\begin{myexercise}[3.27]
+Q: 图中的边数$|E|\geq 2$，取m=3，则若3个图都只有一条边（这在$G(n,\frac{1}{n})$中有较大的可能发生），那么这3个图都不满足性质Q，但是这三个图的并满足性质Q。
+\end{myexercise}
+\begin{myexercise}[3.28]
+性质Q是"increasing property"当且仅当对于任意$A\subseteq B\subseteq \{1,2,3,\ldots,n\}$，如果A具有性质Q，那么B也具有性质Q。\\
+引理：如果Q是"increasing property"且有$0\leq p\leq q\leq 1$，那么$P(N(n,p)$具有性质$Q)\leq P(N(n,q)$具有性质Q$)$。\\
+证明：生成$A=N(n,p), B=N(n, \frac{q-p}{1-p})$，$A$与$B$的生成相互独立，令$C=A\cup B$，则$C$有期望$nq$个元素(对于任意$i\in \{1,2,3,\ldots,n\}$，$P(i\in A)=p$，$P(i\notin A \wedge i\in B)=(1-p)\times \frac{q-p}{1-p}=q-p$，所以$P(i\in C)=p+(q-p)=q$)，所以$C$与$N(n,q)$有相同的分布。由若$A$具有性质Q则$C$具有性质Q，推得$P(N(n,p)$具有性质$Q)\leq P(N(n,q)$具有性质$Q)$。\\
+定义$N(n,p)$的m-fold replication为$m$个互相独立生成的$N(n,p)$的并集。用$A$表示该并集，则不难得到$A$有期望$nq$个元素，其中$q=1-(1-p)^{m}$，从而$A$与$N(n,q)$有相同的分布。%
+不难得到$P(N(n,q)$不具有性质$Q)\leq (P(N(n,p)$不具有性质$Q))^{m}$，由$q=1-(1-p)^{m}\leq 1-(1-mp)=mp$得$P(N(n,q)$具有性质$Q\leq P(N(n,mp)$具有性质$Q)$，从而$P(N(n,mp)$不具有性质$Q)\leq P(N(n,q)$不具有性质$Q)\leq (P(N(n,p)$不具有性质$Q))^{m}$ (*)。\\
+下面证明：任何$N(n,p)$中的increasing property Q在$p(n)$具有相变，其中$p(n)=min\{p|P(N(n,p)$具有性质$Q)=\frac{1}{2}\}$\\
+设$p_{0}(n)$为任意满足$\lim_{n\rightarrow \infty}\frac{p_{0}(n)}{p(n)}=0$的函数，断言$lim_{n\rightarrow \infty }P(N(n,p_{0}(n))$具有性质$Q)=0$。\\
+(反证)若$lim_{n\rightarrow \infty }P(N(n,p_{0}(n))$具有性质$Q)>0$，则存在$\varepsilon>0$满足$\varepsilon=lim_{n\rightarrow \infty }P(N(n,p_{0}(n))$具有性质$Q)$，取$m=\lceil\frac{1}{\varepsilon}\rceil$，令$H$为$N(n,p_{0}(n)$的m-fold replication，则由(*)知$P(H$不具有性质$Q)\leq (1-\varepsilon)^{m}\leq \frac{1}{2}$，所以$P(H$具有性质$Q)\geq \frac{1}{2}$，从而由$p(n)$的定义和$(*)$知$p(n)\leq mp_{0}(n)$，得$\frac{p_{0}(n)}{p(n)}\geq \frac{1}{m}$，这与$\lim_{n\rightarrow \infty}\frac{p_{0}(n)}{p(n)}=0$矛盾，假设不成立。所以断言成立。同理可证$lim_{n\rightarrow \infty}P(N(n,p_{1}(n))$具有性质$Q)=1$。于是任意$N(n,p)$的increasing property都存在界点。\\
+\end{myexercise}
+\begin{myexercise}[3.29]
+1. \{1,2,3,\ldots,n\}中完全平方数的个数为$\lfloor \sqrt{n}\rfloor$，因为界点在渐进意义下只存在一个，因此若$\lim_{n\rightarrow \infty}p=0$的情况下求得界点，则可知界点必定为在此情况下的$p$。下面证明$\lim_{n\rightarrow \infty}p=0$的情况下存在界点。因为$\lim_{n\rightarrow \infty}np/n=\lim_{n\rightarrow \infty}p=0$，所以取$np$个数均不为完全平方数的概率为$(1-\frac{\sqrt{n}}{n})(1-\frac{\sqrt{n}}{n-1})\ldots (1-\frac{\sqrt{n}}{n-np+1})= (1-\frac{\sqrt{n}}{n})^{np}$，令$lim_{n\rightarrow \infty}(1-\frac{\sqrt{n}}{n})^{np}=\frac{1}{2}$，解得界点$p(n)=\frac{np}{n}=\frac{ln2}{\sqrt{n}}$。\\
+另外，本题还有一种思路：$N(n,p)$中无完全平方数的概率为$(1-p)^{\sqrt{n}}$，从而有完全平方数的概率为$1-(1-p)^{\sqrt{n}}$，令$1-(1-p)^{\sqrt{n}}=\frac{1}{2}$，解得$p(n)=1-(\frac{1}{2})^{\frac{1}{\sqrt{n}}}$。这个结果看似与第一种方法不同，但其实$lim_{n\rightarrow \infty}\frac{\frac{ln2}{\sqrt{n}}}{1-(\frac{1}{2})^{\frac{1}{\sqrt{n}}}}=1$，因此实际上在二者等价。\\
+2. \{1,2,3,\ldots,n\}中完全立方数的个数为$\lfloor \sqrt[3]{n}\rfloor$，因为界点在渐进意义下只存在一个，因此若$\lim_{n\rightarrow \infty}p=0$的情况下求得界点，则可知界点必定为在此情况下的$p$。下面证明$\lim_{n\rightarrow \infty}p=0$的情况下存在界点。因为$\lim_{n\rightarrow \infty}np/n=\lim_{n\rightarrow \infty}p=0$，所以取$np$个数均不为完全立方数的概率为$(1-\frac{\sqrt[3]{n}}{n})^{np}$，令$lim_{n\rightarrow \infty}(1-\frac{\sqrt[3]{n}}{n})^{np}=\frac{1}{2}$，解得界点$p(n)=\frac{np}{n}=\frac{ln2}{\sqrt[3]{n}}$。\\
+同第一题一样，本题用另一种思路求得的界点为$p(n)=1-(\frac{1}{2})^{\frac{1}{\sqrt[3]{n}}}$，且与第一种方法等价。\\
+3. $N(n,p)$中无偶数的概率为$(1-p)^{\frac{n}{2}}$，从而有偶数的概率为$1-(1-p)^{\frac{n}{2}}$，令$1-(1-p)^{\frac{n}{2}}=\frac{1}{2}$，解得$p(n)=1-(\frac{1}{2})^{\frac{2}{n}}$\\
+4.当$n\rightarrow \infty$，考虑如果已经确定了2个数，那么对于任意选取的第3个数，有$3\times\frac{\frac{(n-1)(n-2)}{2}}{A_{n}^{3}}=\frac{3}{2n}$可能性3个数满足$x+y=z$，所以有$(1-\frac{3}{2n})=(1-\frac{3}{2n})^{C_{2}^{2}}$的概率不满足$x+y=z$，在此基础上任意选取第4个数后，有$(1-\frac{3}{2n})^{C_{2}^{2}+C_{3}^{2}}$的概率不满足$x+y=z$，类似的，%
+任意选取第$np$个数后，有$(1-\frac{3}{2n})^{C_{2}^{2}+C_{3}^{2}+\ldots+C_{np}^{2}}$的概率不满足$x+y=z$，这里必须有$lim_{n\rightarrow \infty}\frac{C_{np}^{2}}{n}=0$。因为界点在渐进意义下只存在一个，因此若$lim_{n\rightarrow \infty}\frac{C_{np}^{2}}{n}=0$的情况下存在界点，则可以界点必定为在此情况下的$p$。令$1-(1-\frac{3}{2n})^{C_{2}^{2}+C_{3}^{2}+\ldots+C_{k}^{2}}=\frac{1}{2}$，则解得$np=\sqrt[3]{4nln2}$，不难验证此解满足对$np$的限制条件，从而解得$p(n)=\frac{\sqrt[3]{4nln2}}{n}$。\\
+另外，出于兴趣，我写了一个程序对第4题的计算结果进行了计算机模拟验证，验证表明结果是正确的。\\
+程序如下：\\
+\lstset{ language={[ANSI]C},
+         showspaces=false,
+         showtabs=false,
+         tabsize=4,
+         frame=single,
+         framerule=1pt,
+         framexleftmargin=5mm,
+         framexrightmargin=5mm,
+         framextopmargin=5mm,
+         framexbottommargin=5mm,
+         %numbers=left,
+         %numberstyle=\small,
+         basicstyle=\tt,
+         directivestyle=\tt,
+         identifierstyle=\tt,
+         commentstyle=\tt,
+         stringstyle=\tt,
+         keywordstyle=\color{blue}\tt
+}
+\begin{lstlisting}
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+#include<time.h>
+#define N 1000
+int base[N+1];
+double getrand()
+{
+	return (double)((rand()<<15)+rand())/
+        (double)(RAND_MAX*RAND_MAX);
+}
+int gen(double p)
+{
+	return (getrand()<=p);
+}
+double est(int n)
+{
+	return pow(4.0*n*log(2), 1.0/3.0)/n;
+}
+double lower(int n)
+{
+	return pow(4.0*n*log(2), 1.0/3.0)/pow(n, 1.2);
+}
+double upper(int n)
+{
+	return pow(4.0*n*log(2), 1.0/3.0)/pow(n, 0.8);
+}
+int test()
+{
+	int i, j, k;
+	int p = 0;
+	double r;
+	r = est(N);
+	//r = lower(N);
+	//r = upper(N);
+	for(i=1; i<=N; i++)
+	{
+		if(gen(r))
+		{
+			base[p] = i;
+			p ++;
+		}
+	}
+	for(i=0; i<p; i++)
+	{
+		for(j=0; j<p; j++)
+		{
+			if(i == j) continue;
+			for(k=0; k<p; k++)
+			{
+				if(i == k) continue;
+				if(j == k) continue;
+				if(base[i]+base[j]==base[k]) return 1;
+			}
+		}
+	}
+	return 0;
+}
+int main(void)
+{
+	int i;
+	int ans = 0;
+	srand(time(NULL));
+	for(i=0; i<N; i++)
+	{
+		ans += test();
+	}
+	printf("%d\n", ans);
+	return 0;
+}
+\end{lstlisting}
+\end{myexercise}
+\begin{myexercise}[3.40]
+$\because (1-\frac{1}{2^{3}})^{2^{3}}\approx0.3436$,\\
+$(1-\frac{1}{2^{5}})^{2^{5}}\approx0.3621$,\\
+$(1-\frac{1}{2^{7}})^{2^{7}}\approx0.3664$,\\
+$\frac{1}{e}\approx0.3679$,\\
+$\therefore |\frac{1}{e}-(1-\frac{1}{2^{3}})^{2^{3}}|\approx0.0243$, $\frac{|\frac{1}{e}-(1-\frac{1}{2^{3}})^{2^{3}}|}{\frac{1}{e}}\approx 0.0661$, \\
+$|\frac{1}{e}-(1-\frac{1}{2^{5}})^{2^{5}}|\approx0.0058$, $\frac{|\frac{1}{e}-(1-\frac{1}{2^{5}})^{2^{5}}|}{\frac{1}{e}}\approx 0.0158$, \\
+$|\frac{1}{e}-(1-\frac{1}{2^{7}})^{2^{7}}|\approx0.0015$, $\frac{|\frac{1}{e}-(1-\frac{1}{2^{7}})^{2^{7}}|}{\frac{1}{e}}\approx 0.0041$, \\
+
+\end{myexercise}
+\end{CJK*}     % 结束中文环境
+\end{document} % 结束正文 

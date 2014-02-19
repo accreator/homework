@@ -1,0 +1,108 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{times}                       % 使用 Times New Roman 字体
+\usepackage{CJK,CJKnumb,CJKulem}         % 中文支持宏包
+\usepackage{color}                       % 支持彩色
+\usepackage{amsthm} %数学定理
+\usepackage{amsmath} %数学符号
+\usepackage{amssymb} %数学符号
+\usepackage{indentfirst} %缩进
+\usepackage{graphicx} %图形支持
+\usepackage{listings} %源代码插入
+
+\usepackage{float} %处理图片位置
+%——————————–其他宏包——————————
+%\usepackage{amsmath,amsthm,amsfonts,amssymb,bm} % 数学宏包
+%\usepackage{graphicx,psfrag}                    % 图形宏包
+%\usepackage{makeidx}                            % 建立索引宏包
+%\usepackage{listings}                           % 源代码宏包
+%———————————正文———————————–
+% 换行 \\
+% 换页 \clearpage
+
+\begin{document} % 开始正文
+\begin{CJK*}{GBK}{song}                           % 开始中文环境
+\newtheorem{theorem}{定理}[section]
+\newtheorem{lemma}{引理}[section]
+\newtheorem{definition}{定义}[section]
+\newtheorem*{myproof}{证明}
+\newtheorem*{myexercise}{练习}
+\setlength{\parindent}{2em}
+\author{孙锴}                                 % 作者
+\title{Homework 6}                                % 题目
+\maketitle                                       % 生成标题
+\begin{myexercise}[4.25]
+我对一张鸟的图片进行了处理。
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{map100}
+\caption{原图}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{map50}
+\caption{使用50\%的奇异向量的结果}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{map25}
+\caption{使用25\%的奇异向量的结果}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{map10}
+\caption{使用10\%的奇异向量的结果}
+\end{figure}
+2.对于保留50\%奇异向量的图，RGB百分比分别为99.9963\%，99.9974\%，99.9901\%。\\
+对于保留25\%奇异向量的图，RGB百分比分别为99.9734\%，99.9758\%，99.9227\%。\\
+对于保留10\%奇异向量的图，RGB百分比分别为99.9193\%，99.9045\%，99.7110\%。\\
+\end{myexercise}
+\begin{myexercise}[4.30]
+1.$\because$$d_{ij}^{2}=(x_{i}-x_{j})^{T}(x_{i}-x_{j})=x_{i}^{T}x_{i}-2x_{i}^{T}x_{j}+x_{j}^{T}x_{j}$ \\
+$\therefore$$\frac{1}{n}\sum_{i=1}^{n}d_{ij}^{2}=\frac{1}{n}\sum_{i=1}^{n}x_{i}^{T}x_{i}+x_{j}^{T}x_{j}-\frac{1}{n}\sum_{i=1}^{n}2x_{i}^{T}x_{j}=\frac{1}{n}\sum_{i=1}^{n}x_{i}^{T}x_{i}+x_{j}^{T}x_{j}-\frac{1}{n}[\sum_{i=1}^{n}x_{i}^{T}]2x_{j}=\frac{1}{n}\sum_{i=1}^{n}x_{i}^{T}x_{i}+x_{j}^{T}x_{j}$\\
+同理，$\frac{1}{n}\sum_{j=1}^{n}d_{ij}^{2}=\frac{1}{n}\sum_{j=1}^{n}x_{j}^{T}x_{j}+x_{i}^{T}x_{i}$ \\
+$\therefore$$\frac{1}{n}\sum_{j}^{n}\sum_{i}^{n}d_{ij}^{2}=\sum_{i=1}^{n}x_{i}^{T}x_{i}+\sum_{j=1}^{n}x_{j}^{T}x_{j}=2\sum_{i=1}^{n}x_{i}^{T}x_{i}$\\
+$\therefore$$-\frac{1}{2}[d_{ij}^{2}-\frac{1}{n}\sum_{j=1}^{n}d_{ij}^{2}-\frac{1}{n}\sum_{i=1}^{n}d_{ij}^{2}+\frac{1}{n^{2}}\sum_{i=1}^{n}\sum_{j=1}^{n}d_{ij}^{2}]=-\frac{1}{2}[d_{ij}^{2}-\frac{1}{n}\sum_{j=1}^{n}x_{j}^{T}x_{j}-x_{i}^{T}x_{i}-\frac{1}{n}\sum_{i=1}^{n}x_{i}^{T}x_{i}-x_{j}^{T}x_{j}+\frac{2}{n}\sum_{i=1}^{n}x_{i}^{T}x_{i}]=-\frac{1}{2}[d_{ij}^{2}-x_{i}^{T}x_{i}-x_{j}^{T}x_{j}]=x_{i}^{T}x_{j}$\\
+$\therefore$命题成立。\\
+2.$\because X^{T}X$正定\\
+$\therefore X^{T}X$可分解为$V^{T}\sigma V$，其中$V$是正交阵，$\sigma$是特征值构成的实对角矩阵。\\
+$\because V^{T}\sigma V=V^{T}\sigma^{\frac{1}{2}}\sigma^{\frac{1}{2}}V$\\
+$\therefore X=V^{T}\sigma^{\frac{1}{2}}$\\
+因此要求$X$只须对$X^{T}X$进行特征值分解。实际上，更进一步地，可以证明$X^{T}X$的特征值分解与$X^{T}X$的奇异值分解等价。下面对此做简要的证明：\\
+设$X^{T}X$的特征值分解为$V^{T}\sigma V$，其中$V$为正交阵。则$X^{T}XX^{T}X$的特征值分解为$V^{T}\sigma^{2} V$，由第10题的中间结果可知$\sigma$为$X^{T}X$的奇异值，从而证明了$X^{T}X$的特征值与奇异值相同。由特征值与奇异值的定义与正交矩阵的性质不难得到$V^{T}\sigma V$也是$X^{T}X$的奇异值分解。\\
+\end{myexercise}
+\begin{myexercise}[4.31]
+1.由前一题所描述的算法，计算得到如下结果：\\
+\begin{tabular}{rlcc}
+Number & City & X & Y \\ [0.5ex]
+1 & Boston & -1142.083884 & -377.907384 \\
+2 & Buffalo & -747.362247 & -317.003888 \\
+3 & Chicago & -315.219235 & -181.035966 \\
+4 & Dallas & 157.360696 & 468.414553 \\
+5 & Denver & 592.061231 & -31.354278 \\
+6 & Houston & 70.881113 & 675.437749 \\
+7 & Los Angeles & 1379.289917 & 243.052158 \\
+8 & Memphis & -225.12034 & 293.102375 \\
+9 & Miami & -884.492215 & 862.650215 \\
+10 & Minneapolis & -17.466515 & -376.539492 \\
+11 & New York & -1026.639099 & -228.77134 \\
+12 & Omaha & 111.698645 & -115.845821 \\
+13 & Philadelphia & -981.486178 & -159.375386 \\
+14 & Phoenix & 1036.07345 & 351.687039 \\
+15 & Pittsburgh & -723.52853 & -138.947703 \\
+16 & Saint Louis & -199.731252 & 53.849447 \\
+17 & Salt Lake City & 944.280885 & -148.250074 \\
+18 & San Francisco & 1540.24642 & -70.565538 \\
+19 & Seattle & 1332.184127 & -738.13522 \\
+20 & Washington D.C. & -900.946987 & -64.461445 \\
+\end{tabular}\\
+由此绘制的图像如下：
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.7]{amap}
+\caption{生成的美国地图}
+\end{figure}
+2.在航线均为近似的最短距离的前提下，可以用距离构造出世界地图，但是方法与前面所述的稍有区别。因为对于美国地图，可以将点近似看为二维空间的点，而对于世界地图，则必须将点近似看为三维空间的点。同时，由于航线距离为球面距离，而不是两点之间的直线距离，所以需要对距离进行转换，将球面距离转化为直线距离。除此之外，与第1问中二维的情况相同。
+\end{myexercise}
+\end{CJK*}     % 结束中文环境
+\end{document} % 结束正文 

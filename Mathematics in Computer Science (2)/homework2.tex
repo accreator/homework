@@ -1,0 +1,63 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{times}                       % 使用 Times New Roman 字体
+\usepackage{CJK,CJKnumb,CJKulem}         % 中文支持宏包
+\usepackage{color}                       % 支持彩色
+\usepackage{amsthm} %数学定理
+\usepackage{amsmath} %数学符号
+\usepackage{amssymb} %数学符号
+\usepackage{indentfirst} %缩进
+\usepackage{graphicx} %图形支持
+%——————————–其他宏包——————————
+%\usepackage{amsmath,amsthm,amsfonts,amssymb,bm} % 数学宏包
+%\usepackage{graphicx,psfrag}                    % 图形宏包
+%\usepackage{makeidx}                            % 建立索引宏包
+%\usepackage{listings}                           % 源代码宏包
+%———————————正文———————————–
+% 换行 \\
+% 换页 \clearpage
+
+\begin{document} % 开始正文
+\begin{CJK*}{GBK}{song}                           % 开始中文环境
+\newtheorem{theorem}{定理}[section]
+\newtheorem{lemma}{引理}[section]
+\newtheorem{definition}{定义}[section]
+\newtheorem*{myproof}{证明}
+\newtheorem*{myexercise}{练习}
+\setlength{\parindent}{2em}
+\author{孙锴}                                 % 作者
+\title{Homework 2}                                % 题目
+\maketitle                                       % 生成标题
+\begin{myexercise}[2.36]
+本题我采用C语言生成随机数据并用Excel绘制直方图。由于C语言并没有可以直接生成正态分布随机数的方法，通过查阅若干资料，我采用Box-Muller法生成了正态分布随机数，并用2.5节的方法生成了n维球面上的随机点。所绘制的直方图如下：\\
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.5]{hw21}
+\caption{3维球面随机两点距离分布}
+\end{figure}
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.5]{hw22}
+\caption{100维球面随机两点距离分布}
+\end{figure}
+\end{myexercise}
+\begin{myexercise}[2.37]
+原点及原点周围附近的将有非常大的概率密度，概率密度随着与原点距离的增加迅速下降，使得单位球面以外的区域的概率质量趋向于0。\\
+设空间维数为d，则要满足单位球面外的区域的概率质量为0，则必有$\int_{S^{d}}d\Omega \int_{0}^{1}r^{d-1}p(r)dr=1$\\
+$\therefore \int_{0}^{1}r^{d-1}e^{-\frac{r^{2}}{2\sigma^{2}}}dr=\frac{(2\pi)^{\frac{d}{2}}\sigma^{d}}{A(d)}$\\
+$\therefore \int_{0}^{1}r^{d-1}e^{-\frac{r^{2}}{2\sigma^{2}}}dr=\Gamma(\frac{d}{2})2^{\frac{d}{2}-1}\sigma^{d}$\\
+用$t=\frac{r^{2}}{2\sigma^{2}}$换元，得到$\int_{0}^{\frac{1}{2\sigma^{2}}}(2t\sigma^{2})^{\frac{d-1}{2}}e^{-t}2^{-\frac{1}{2}}\sigma t^{-\frac{1}{2}}dt=\Gamma(\frac{d}{2})2^{\frac{d}{2}-1}\sigma^{d}$\\
+$\therefore \int_{0}^{\frac{1}{2\sigma^{2}}}t^{\frac{d}{2}-1}e^{-t}dt=\Gamma(\frac{d}{2})$\\
+考虑等式左边，设$f(x)=x^{\frac{d}{2}-1}e^{-x}=x^{a}e^{-x}$，其中$a=\frac{d}{2}-1$，则$f^{'}(x)=\frac{ax^{a-1}-x^{a}}{e^{x}}$，令$f^{'}(x)=0$，得$x=0,a$，从而得到$f(x)$在%
+$[0,a]$单调递增，在$[a,+\infty]$单调递减。不难看出$f(x)$在$[a,+\infty]$上减小速度非常快，在点$2a$处的值与在点$a$值的比$\frac{f(2a)}{f(a)}=(\frac{2}{e})^{\frac{d}{2}-1}$，更进一步，在点$ca$处($c>1$且为一个常数)，有$\frac{f(ca)}{f(a)}=(\frac{c}{e^{c-1}})^{(\frac{d}{2}-1)}$，因此在$d$极大且$\sigma$极小时，$\frac{f(ca)}{f(a)}\rightarrow 0$，从而$\int_{0}^{\frac{1}{2\sigma^{2}}}t^{\frac{d}{2}-1}e^{-t}dt= \int_{0}^{c(\frac{d}{2}-1)}t^{\frac{d}{2}-1}e^{-t}dt$，即要满足单位球面外的区域的概率质量趋向于0，只须令$\frac{1}{2\sigma^{2}}= ca$，得$\sigma=\frac{1}{\sqrt{c(d-2)}}$，从而得存在$\sigma$满足$\sigma=\Theta(\sqrt{\frac{1}{d}})$，又因为$c=1$时不成立，所以显然有$\sigma=O(\sqrt{\frac{1}{d}})$，所以得到最终结论：\\
+存在满足$\sigma=\Theta(\sqrt{\frac{1}{d}})$的满足本题条件的$\sigma$，且任意满足题目条件的$\sigma$都必须有$\sigma\leq \sqrt{\frac{1}{d-2}}$\\
+\end{myexercise}
+\begin{myexercise}[2.50]
+1.许多实际问题可以用高维向量抽象表示、研究和解决，高维空间中的许多性质与三维空间不同。\\
+2.计算n维球体积与表面积的方法，体积与表面积的关系。\\
+3.当n趋向无穷时，球体积趋向于0且绝大多数点聚集于赤道表侧的窄圆环，表面积同样主要分布在赤道。\\
+4.生成n维球面上的随机点的方法，高维高斯分布。\\
+5.随机投影和Johnson-Lindenstrauss定理。\\
+\end{myexercise}
+\end{CJK*}     % 结束中文环境
+\end{document} % 结束正文 

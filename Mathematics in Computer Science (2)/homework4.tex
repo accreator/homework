@@ -1,0 +1,47 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{times}                       % 使用 Times New Roman 字体
+\usepackage{CJK,CJKnumb,CJKulem}         % 中文支持宏包
+\usepackage{color}                       % 支持彩色
+\usepackage{amsthm} %数学定理
+\usepackage{amsmath} %数学符号
+\usepackage{amssymb} %数学符号
+\usepackage{indentfirst} %缩进
+\usepackage{graphicx} %图形支持
+\usepackage{listings} %源代码插入
+%——————————–其他宏包——————————
+%\usepackage{amsmath,amsthm,amsfonts,amssymb,bm} % 数学宏包
+%\usepackage{graphicx,psfrag}                    % 图形宏包
+%\usepackage{makeidx}                            % 建立索引宏包
+%\usepackage{listings}                           % 源代码宏包
+%———————————正文———————————–
+% 换行 \\
+% 换页 \clearpage
+
+\begin{document} % 开始正文
+\begin{CJK*}{GBK}{song}                           % 开始中文环境
+\newtheorem{theorem}{定理}[section]
+\newtheorem{lemma}{引理}[section]
+\newtheorem{definition}{定义}[section]
+\newtheorem*{myproof}{证明}
+\newtheorem*{myexercise}{练习}
+\setlength{\parindent}{2em}
+\author{孙锴}                                 % 作者
+\title{Homework 4}                                % 题目
+\maketitle                                       % 生成标题
+\begin{myexercise}[3.48]
+P(随机选取的点在大小为k的联通块中)=$\frac{kx_{k}}{\sum_{i=1}^{n}ix_{i}}=\frac{kx_{k}}{n}$\\
+E(随机选取的点所在的连通块的大小)=$\sum_{i=1}^{n}\frac{ix_{i}}{n}$\\
+\end{myexercise}
+\begin{myexercise}[3.51]
+对于满足$\lim_{n\rightarrow \infty}\frac{i}{n}=0$的i，有$1-(1-\frac{d}{n})^{i}\approx\frac{id}{n}$，则$\lim_{n\rightarrow \infty}n(1-\frac{d}{n})^{i}=n\frac{id}{n}=id$，所以二项分布$[n, 1-(1-\frac{d}{n})^{i}]$可由泊松分布$e^{-di}\frac{(di)^{k}}{k!}$逼近，设$f(x)=e^{-di}\frac{(di)^{x}}{x!}\approx\frac{(edi)^{x}e^{-di}}{\sqrt{2\pi x}x^{x}}$，则$f(i)=e^{i-di+ilnd-ln\sqrt{2\pi i}}=e^{-i(d+\frac{ln\sqrt{2\pi i}}{i}-1-lnd)}$，因为$d>1$，所以$d\geq 1+lnd$，所以$(d+\frac{ln\sqrt{2\pi i}}{i}-1-lnd)>0$，从而若$i>clnn$，则$\lim_{n\rightarrow \infty} e^{-i(d+\frac{ln\sqrt{2\pi i}}{i}-1-lnd)}=0$。\\
+对于满足$\lim_{n\rightarrow \infty}\frac{i}{n}>0$的i，显然存在$\varepsilon >0$满足$\varepsilon = \lim_{n\rightarrow \infty}\frac{i}{n}$，从而$i=\Omega(n)$，所以二项分布$[n, 1-(1-\frac{d}{n})^{i}]$可由高斯分布$\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^{2}}{2\sigma^{2}}}$逼近，设$f(x)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^{2}}{2\sigma^{2}}}$，则$f(i)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(i-\mu)^{2}}{2\sigma^{2}}}$。由二项分布性质知$\mu=n[1-(1-\frac{d}{n})^{i}], \sigma^{2}=n(1-(1-\frac{d}{n})^{i})(1-\frac{d}{n})^{i}$，由$\Theta$定义，$1-e^{-d\Theta}=\Theta$ $(*)$。由高斯分布的性质，若$n\rightarrow \infty$，则满足$|i-\mu|=O(\sigma)$的高斯函数中的区域的积分$\rightarrow 1$，从而满足$f(i)>0$的i均满足$|\frac{i-\mu}{\sigma}|=|\frac{i-n(1-e^{-\frac{d}{n}i})}{\sqrt{n(1-e^{-\frac{d}{n}i})e^{-\frac{d}{n}i}}}|=O(1)(**)$，由(*)(**)可验证对于任意满足$\lim_{i\rightarrow \infty}|\frac{\sigma}{i-\Theta n}|=0$的i，$(*)(**)$式不成立，又因为$\sigma=O(\sqrt{n})$，从而有$i\notin [0,\Theta-\sqrt{n}]\cup[\Theta+\sqrt{n}]$时$(*)(**)$式不成立。\\
+综上，命题得证。\\
+\end{myexercise}
+\begin{myexercise}[3.52]
+$F^{'}(x)=de^{-dx}-1$，令$F^{'}(x)=0$，解得$x=\frac{lnd}{d}$，不难看出此即为$F(x)$的最大值点，即$x_{max}=\frac{lnd}{d}$。\\
+$F(x_{max})=1-\frac{1}{d}-\frac{lnd}{d}$\\
+由$\frac{i}{n}=x_{max}$得$i=\frac{nlnd}{d}$\\
+\end{myexercise}
+\end{CJK*}     % 结束中文环境
+\end{document} % 结束正文 

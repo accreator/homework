@@ -1,0 +1,65 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{times}                       % 使用 Times New Roman 字体
+\usepackage{CJK,CJKnumb,CJKulem}         % 中文支持宏包
+\usepackage{color}                       % 支持彩色
+\usepackage{amsthm} %数学定理
+\usepackage{amsmath} %数学符号
+\usepackage{amssymb} %数学符号
+\usepackage{indentfirst} %缩进
+\usepackage{graphicx} %图形支持
+\usepackage{listings} %源代码插入
+
+\usepackage{float} %处理图片位置
+%——————————–其他宏包——————————
+%\usepackage{amsmath,amsthm,amsfonts,amssymb,bm} % 数学宏包
+%\usepackage{graphicx,psfrag}                    % 图形宏包
+%\usepackage{makeidx}                            % 建立索引宏包
+%\usepackage{listings}                           % 源代码宏包
+%———————————正文———————————–
+% 换行 \\
+% 换页 \clearpage
+
+\begin{document} % 开始正文
+\begin{CJK*}{GBK}{song}                           % 开始中文环境
+\newtheorem{theorem}{定理}[section]
+\newtheorem{lemma}{引理}[section]
+\newtheorem{definition}{定义}[section]
+\newtheorem*{myproof}{证明}
+\newtheorem*{myexercise}{练习}
+\setlength{\parindent}{2em}
+\author{孙锴}                                 % 作者
+\title{Homework 8}                                % 题目
+\maketitle                                       % 生成标题
+\begin{myexercise}[5.14]
+取到第1个不同的数的期望抽取次数为1，在第1次抽取的基础上，取到第2个不同的数的期望抽取次数为$\frac{n}{n-1}$，$\ldots$，在第i-1次抽取的基础上，取到第i个不同的数的期望抽取次数为$\frac{n}{n-i+1}$。所以$d=\frac{n}{n}+\frac{n}{n-1}+\ldots+\frac{n}{1}=n(1+\frac{1}{2}+\ldots+\frac{1}{n})\approx nlogn$。\\
+\end{myexercise}
+\begin{myexercise}[5.15]
+$\because E=\sum_{i=1}^{\infty}i(1-\frac{1}{n-1})^{i-1}\frac{1}{n-1}$\\
+$\therefore (1-\frac{1}{n-1})E=\sum_{i=1}^{\infty}i(1-\frac{1}{n-1})^{i}\frac{1}{n-1}$\\
+$\therefore E-(1-\frac{1}{n-1})E=\sum_{i=0}^{\infty}(1-\frac{1}{n-1})^{i}\frac{1}{n-1}=1$\\
+$\therefore E=n-1$\\
+\end{myexercise}
+\begin{myexercise}[5.16]
+第一幅图：增加$(1,2)$，则$h_{2,4}$由4增大为8；增加$(2,4)$，则$h_{2,4}$由4减小为2。\\
+第二幅图：增加$(1,2)$，则$h_{2,4}$由8增大为12；增加$(3,4)$，则$h_{2,4}$由8减小为6。\\
+第三幅图：增加$(1,2)$，则$h_{2,4}$由2增大为$\frac{10}{3}$；增加$(3,4)$，则$h_{2,4}$由2减小为$\frac{9}{5}$。\\
+\end{myexercise}
+\begin{myexercise}[5.18]
+根据对题意的两种理解有以下两种解答：\\
+(1)两个随机行走序列的起点都是原点：\\
+设两个独立的随机行走A,B的序列分别为$A: a_{1},a_{2},a_{3},\ldots$，$B: b_{1},b_{2},b_{3},\ldots$，其中$a_{i}$与$b_{i}$分别表示A,B在i时刻相比i-1时刻的增量。考虑行走序列$C: c_{1},c_{2},c_{3},\ldots$，其中$c_{2i-1}=a_{i}, c_{2i}=-b_{i}$，则因为A,B是两个独立的随机行走序列，所以C也是一个随机行走序列。由2维网格中逃逸概率为0知对于C，其回到原点的概率为1，设C期望于时刻t回到原点，由奇偶性知t必为偶数，则有$c_{1}+c_{2}+\ldots+c_{t}=(a_{1}-b_{1})+(a_{2}-b_{2})+\ldots+(a_{\frac{t}{2}}-b_{\frac{t}{2}})=(0,0)$，则$a_{1}+a_{2}+\ldots+a_{\frac{t}{2}}=b_{1}+b_{2}+\ldots+b_{\frac{t}{2}}$，即A与B期望于$\frac{t}{2}$时刻相遇，从而A与 B相遇的概率为1。\\
+(2)两个随机行走序列的起点不同：\\
+考虑随机行走序列的起点之间的距离有限，从而起点之间的电阻有限，而起点到无穷远点之间的电阻无限，从而两个随机行走序列的起点的电势都是1。记两个随机行走序列为A,B，则以A的位置为原点建立坐标系，则由类似(1)中的推导不难看出B在此坐标系中依然是随机行走序列。由电势的意义，B在到达无穷远之前到达A的概率为1，从而A与B相遇概率为1。\\
+\end{myexercise}
+\begin{myexercise}[5.21]
+将二叉树看成等价的电阻网络，对于二叉树同一层的节点，由于其电势相同，所以可以在同一层的点间连加一条边而不影响整个网络，如下图：
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{hw81}
+\caption{电阻网络的转换}
+\end{figure}
+从而整个网络的等效电阻$R_{eff}=\sum_{i=1}^{\infty}\frac{1}{2^{i}}=1$，从而$p_{escape}=\frac{c_{eff}}{c_{root}}=\frac{1}{2}$\\
+\end{myexercise}
+\end{CJK*}     % 结束中文环境
+\end{document} % 结束正文 

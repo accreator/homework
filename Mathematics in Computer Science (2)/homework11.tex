@@ -1,0 +1,113 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{times}                       % 使用 Times New Roman 字体
+\usepackage{CJK,CJKnumb,CJKulem}         % 中文支持宏包
+\usepackage{color}                       % 支持彩色
+\usepackage{amsthm} %数学定理
+\usepackage{amsmath} %数学符号
+\usepackage{amssymb} %数学符号
+\usepackage{indentfirst} %缩进
+\usepackage{graphicx} %图形支持
+\usepackage{listings} %源代码插入
+
+\usepackage{float} %处理图片位置
+%——————————–其他宏包——————————
+%\usepackage{amsmath,amsthm,amsfonts,amssymb,bm} % 数学宏包
+%\usepackage{graphicx,psfrag}                    % 图形宏包
+%\usepackage{makeidx}                            % 建立索引宏包
+%\usepackage{listings}                           % 源代码宏包
+%———————————正文———————————–
+% 换行 \\
+% 换页 \clearpage
+
+\begin{document} % 开始正文
+\begin{CJK*}{GBK}{song}                           % 开始中文环境
+\newtheorem{theorem}{定理}[section]
+\newtheorem{lemma}{引理}[section]
+\newtheorem{definition}{定义}[section]
+\newtheorem*{myproof}{证明}
+\newtheorem*{myexercise}{练习}
+\setlength{\parindent}{2em}
+\author{孙锴}                                 % 作者
+\title{Homework 11}                                % 题目
+\maketitle                                       % 生成标题
+\begin{myexercise}[7.6]
+%对于任意互不相等的$x_{1},x_{2}\in \{1,2,\ldots,m\}$，任意互不相等的$z_{1},z_{2}\in \{0,1,2,\ldots,M\}$，都有\\
+%$Prob(h(x_{1})=z_{1} \wedge h(x_{2})=z_{1})=Prob(h(x_{1})=z_{1})Prob(h(x_{2})=z_{1})=\frac{1}{(M+1)^{2}}$\\
+%$Prob(h(x_{1})=z_{1} \wedge h(x_{2})=z_{2})=Prob(h(x_{1})=z_{1})Prob(h(x_{2})=z_{2})=\frac{1}{(M+1)^{2}}$\\
+%两式相除，得$Prob(h(x_{2})=z_{1})=Prob(h(x_{2})=z_{2})$，从而得对于任意$x\in {1,2,\ldots,m}$，都有\\
+%$Prob(h(x)=0)=Prob(h(x)=1)=\ldots =Prob(h(x)=M)$\\
+%又因为$Prob(h(x)=0)+Prob(h(x)=1)+\ldots +Prob(h(x)=M)=1$，从而得\\
+%$Prob(h(x)=0)=Prob(h(x)=1)=\ldots Prob(h(x)=M)=\frac{1}{M+1}$，即$Prob(h(x)=z)=\frac{1}{M+1}$。\\
+对于任意互不相等的$x_{1},x_{2}\in \{1,2,\ldots,m\}$，任意的$z_{1},z_{2}\in \{0,1,2,\ldots,M\}$，都有\\
+$Prob(h(x_{1})=z_{1} \wedge h(x_{2})=z_{2})=\frac{1}{(M+1)^{2}}$\\
+所以$Prob(h(0)=0)=\sum_{i=0}^{M} Prob(h(0)=0 \wedge h(1)=i)=(M+1)\frac{1}{(M+1)^{2}}=\frac{1}{M+1}$。\\
+同理，对于任意$x\in \{1,2,\ldots,m\},z\in \{0,1,2,\ldots,M\}$，都有$Prob(h(x)=z)=\frac{1}{M+1}$。
+\end{myexercise}
+\begin{myexercise}[7.7]
+(a)不是。因为若有$h(x)=u, h(y)=v\ (x\neq y)$，则由此可得
+\begin{displaymath}
+\left( \begin{array}{cc}
+x & 1 \\
+y & 1 \\
+\end{array} \right)
+\left( \begin{array}{c}
+a \\
+b \\
+\end{array} \right)
+=
+\left( \begin{array}{c}
+u \\
+v \\
+\end{array} \right)
+\ (mod\ M)
+\end{displaymath}
+所以$a,b$可以唯一确定，因此在此基础上$h(z)\ (z\neq x,y)$的值是确定的。\\
+所以，取$x=x_{0}, y=y_{0}, z=z_{0}, u=u_{0}, v=v_{0}$（$x_{0},y_{0},z_{0}$为$\{0,1,\ldots,p-1\}$中任意互不相等的定值，$u_{0},v_{0}$为$\{0,1,\ldots,p-1\}$中任意定值），
+设由$x_{0},y_{0},u_{0},v_{0}$确定的$a=a_{0}, b=b_{0}$，取$w=w_{0}$，其中$w_{0}=a_{0}z_{0}+b_{0}\ mod\ p$。
+则\\
+$Prob(h(x_{0})=u_{0}\wedge h(y_{0})=v_{0}\wedge h(z_{0})=w_{0})=Prob(h(x_{0})=u_{0}\wedge h(y_{0})=v_{0})=\frac{1}{p^{2}}\neq \frac{1}{p^{3}}$，
+从而$h_{ab}$构成的集合不是$3-universal$。\\
+(b)$\{h_{abc}=ax^{2}+bx+c\ mod\ p|0\leq a,b,c<p\}$，其中p为质数。\\
+下面做简要证明：\\
+对于任意互不相等的$x,y,z\in \{0,1,\ldots,p-1\}$，任意$u,v,w\in \{0,1,\ldots,p-1\}$，满足$h(x)=u, h(y)=v, h(z)=w$当且仅当\\
+\begin{displaymath}
+\left( \begin{array}{ccc}
+x^{2} & x & 1 \\
+y^{2} & y & 1 \\
+z^{2} & z & 1 \\
+\end{array} \right)
+\left( \begin{array}{c}
+a \\
+b \\
+c \\
+\end{array} \right)
+=
+\left( \begin{array}{c}
+u \\
+v \\
+w \\
+\end{array} \right)
+\ (mod\ M)
+\end{displaymath}
+易见等式中的矩阵是对范德蒙矩阵进行若干列交换所得，因此其可逆。从而有且只有一组$a,b,c$满足上述等式。\\
+因此当$a,b,c$为随机值时，$Prob(h(x)=u, h(y)=v, h(z)=w)=\frac{1}{p^{3}}$。\\
+\end{myexercise}
+\begin{myexercise}[7.8]
+（以下讨论均设定义域为$\{0,1,2,\ldots,m-1\}\ (m\geq 2)$）\\
+实际上只需取集合$\{h_{a}(x)=a|0\leq a< m\}$。但是考虑到这个例子中的哈希函数过于糟糕，因此下面给出另一个例子：\\
+$\{h_{ab}(x)=ax+b\ mod\ 2p|0\leq a,b<2p\}$，这里$p$是一个质数。\\
+接下来说明这个例子不是2-universal的。\\
+对于任意互不相等的$x,y$，设$A=\{(a,b)|ax+b=0\wedge ay+b=0\ (mod\ 2p)\}$，则$P(h(x)=0\wedge h(y)=0)=\frac{|A|}{4p^{2}}$。下面计算$|A|$，显然满足$ax+b=0$的$(a,b)$的集合为$\{(0,0),(1,-x),(2,-2x),\ldots,(2p-1,-(2p-1)x)\}\ (mod\ 2p)$，满足$ay+b=0$的集合为$\{(0,0),(1,-y),(2,-2y),\ldots,(2p-1,-(2p-1)y)\}\ (mod\ 2p)$，从而$|A|$等于满足在模$2p$意义下$-kx=-ky\ (0\leq k\leq 2p-1)$的$k$的个数，不难得出$(x-y)$为偶数时，满足条件的k有2种，$(x-y)$为奇数时，满足条件的k有1种，从而可取$x=0,y=2$，则得到$P(h(0)=0\wedge h(2)=0)=\frac{1}{2p^{2}}\neq \frac{1}{4p^{2}}$，从而证明了这个例子不是2-universal的。\\
+\end{myexercise}
+\begin{myexercise}[7.10]
+设期望的翻转次数为$E$，则\\
+$E=p+2(1-p)p+3(1-p)^{2}p+\ldots$\\
+$(1-p)E=(1-p)p+2(1-p)^{2}p+\ldots$\\
+两式相减，得$pE=p+(1-p)p+(1-p)^{2}p+\ldots=1$，从而$E=\frac{1}{p}$。\\
+\end{myexercise}
+\begin{myexercise}[7.12]
+考虑序列$0,0,0,0,1,2,3,4,5$，则用给出的算法所得的答案是5，而真正的众数是0。\\
+\end{myexercise}
+\end{CJK*}     % 结束中文环境
+\end{document} % 结束正文 
